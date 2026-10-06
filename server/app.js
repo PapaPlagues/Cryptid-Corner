@@ -5,4 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-export { app };
+// Routes
+app.get("/", (req, res) => res.send("Hello, world!"));
+
+export default app;
