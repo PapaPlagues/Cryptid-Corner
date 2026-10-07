@@ -253,7 +253,7 @@ export type ChatCreateInput = {
   name: string
   avatar: string
   latestMessage?: Prisma.MessageCreateNestedOneWithoutLatestMessageInput
-  users?: Prisma.UserCreateNestedManyWithoutChatInput
+  users?: Prisma.UserCreateNestedManyWithoutChatsInput
   messages?: Prisma.MessageCreateNestedManyWithoutChatInput
 }
 
@@ -264,7 +264,7 @@ export type ChatUncheckedCreateInput = {
   name: string
   avatar: string
   latestMessageId?: string | null
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatsInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutChatInput
 }
 
@@ -275,7 +275,7 @@ export type ChatUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
   latestMessage?: Prisma.MessageUpdateOneWithoutLatestMessageNestedInput
-  users?: Prisma.UserUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUpdateManyWithoutChatsNestedInput
   messages?: Prisma.MessageUpdateManyWithoutChatNestedInput
 }
 
@@ -286,7 +286,7 @@ export type ChatUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
   latestMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  users?: Prisma.UserUncheckedUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutChatsNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutChatNestedInput
 }
 
@@ -511,7 +511,7 @@ export type ChatCreateWithoutMessagesInput = {
   name: string
   avatar: string
   latestMessage?: Prisma.MessageCreateNestedOneWithoutLatestMessageInput
-  users?: Prisma.UserCreateNestedManyWithoutChatInput
+  users?: Prisma.UserCreateNestedManyWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutMessagesInput = {
@@ -521,7 +521,7 @@ export type ChatUncheckedCreateWithoutMessagesInput = {
   name: string
   avatar: string
   latestMessageId?: string | null
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatsInput
 }
 
 export type ChatCreateOrConnectWithoutMessagesInput = {
@@ -535,7 +535,7 @@ export type ChatCreateWithoutLatestMessageInput = {
   type: $Enums.CHAT_TYPE
   name: string
   avatar: string
-  users?: Prisma.UserCreateNestedManyWithoutChatInput
+  users?: Prisma.UserCreateNestedManyWithoutChatsInput
   messages?: Prisma.MessageCreateNestedManyWithoutChatInput
 }
 
@@ -545,7 +545,7 @@ export type ChatUncheckedCreateWithoutLatestMessageInput = {
   type: $Enums.CHAT_TYPE
   name: string
   avatar: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutChatsInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutChatInput
 }
 
@@ -572,7 +572,7 @@ export type ChatUpdateWithoutMessagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
   latestMessage?: Prisma.MessageUpdateOneWithoutLatestMessageNestedInput
-  users?: Prisma.UserUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUpdateManyWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutMessagesInput = {
@@ -582,7 +582,7 @@ export type ChatUncheckedUpdateWithoutMessagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
   latestMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  users?: Prisma.UserUncheckedUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutChatsNestedInput
 }
 
 export type ChatUpsertWithoutLatestMessageInput = {
@@ -602,7 +602,7 @@ export type ChatUpdateWithoutLatestMessageInput = {
   type?: Prisma.EnumCHAT_TYPEFieldUpdateOperationsInput | $Enums.CHAT_TYPE
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUpdateManyWithoutChatsNestedInput
   messages?: Prisma.MessageUpdateManyWithoutChatNestedInput
 }
 
@@ -612,7 +612,7 @@ export type ChatUncheckedUpdateWithoutLatestMessageInput = {
   type?: Prisma.EnumCHAT_TYPEFieldUpdateOperationsInput | $Enums.CHAT_TYPE
   name?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutChatNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutChatsNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutChatNestedInput
 }
 
