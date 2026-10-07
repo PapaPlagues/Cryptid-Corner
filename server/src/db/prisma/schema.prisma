@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum CHAT_TYPE {
+  PRIVATE
+  GROUP
+  PUBLIC
+}
+
+model User {
+  id       String  @id @default(uuid())
+  username String  @unique
+  password String
+  bio      String  @default("Thank you for visiting my profile")
+  avatar   String?
+
+  following User[] @relation(name: "followersToFollowing")
+  followers User[] @relation(name: "followersToFollowing")
+
+  chat     Chat[]
+  messages Message[]
+
+  posts        Post[]
+  postLikes    Post[]    @relation(name: "likersToPostLikes")
+  comments     Comment[]
+  commentLikes Comment[] @relation(name: "likersToCommentLikes")
+}
+
+model Post {
+  id           String   @id @default(uuid())
+  title        String
+  content      String
+  media        String?
+  isSelfHosted Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  likers   User[]    @relation(name: "likersToPostLikes")
+  comments Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId   String
+
+  likers User[] @relation(name: "likersToCommentLikes")
+}
+
+model Chat {
+  id        String    @id @default(uuid())
+  signature String?   @unique
+  type      CHAT_TYPE
+  name      String
+  avatar    String
+
+  latestMessage   Message? @relation(name: "latestMessage", fields: [latestMessageId], references: [id])
+  latestMessageId String?  @unique
+
+  users    User[]
+  messages Message[]
+}
+
+model Message {
+  id       String   @id @default(uuid())
+  content  String
+  sendTime DateTime @default(now())
+
+  sender        User   @relation(fields: [senderId], references: [id])
+  senderId      String
+  chat          Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId        String
+  latestMessage Chat?  @relation(name: "latestMessage")
+}

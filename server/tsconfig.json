@@ -16,6 +16,8 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
 
+    "esModuleInterop": true,
+
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "moduleDetection": "force",
