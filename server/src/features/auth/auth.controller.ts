@@ -3,7 +3,8 @@ import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as userQueries from "#features/users/user.queries.js";
-import type { SignupBody } from "./auth.types.js";
+import type { SignupBody, LoginBody } from "./auth.types.js";
+import { createToken } from "./auth.utils.js";
 
 const signup = async (
   req: Request<{}, {}, SignupBody>,
@@ -14,7 +15,6 @@ const signup = async (
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // create the user
     const user = await userQueries.createUser(username, hashedPassword);
 
     res.json({
@@ -27,21 +27,30 @@ const signup = async (
   }
 };
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (
+  req: Request<{}, {}, LoginBody>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { username, password } = req.body;
 
     const user = await userQueries.getUserByUsername(username);
-    if (!user) return;
+    if (!user) {
+      throw new Error("no user");
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return;
+    if (!isMatch) {
+      throw new Error("not matching");
+    }
 
-    // token here
+    const token = createToken(user);
 
     res.json({
       id: user.id,
       username: user.username,
+      token,
     });
   } catch (err) {
     console.error(err);
@@ -51,6 +60,21 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const loginGuest = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const guestUsername = process.env.GUEST_USERNAME;
+    if (!guestUsername) {
+      throw new Error("GUEST_USERNAME is not defined");
+    }
+
+    const guest = await userQueries.getUserByUsername(guestUsername);
+    if (!guest) throw new Error();
+
+    const token = createToken(guest);
+
+    res.json({
+      id: guest.id,
+      username: guest.username,
+      token,
+    });
   } catch (err) {
     console.error(err);
     next(err);
