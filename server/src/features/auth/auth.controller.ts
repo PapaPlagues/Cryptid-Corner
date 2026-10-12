@@ -1,7 +1,5 @@
-import { prisma } from "../../db/prisma/prisma.js";
 import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import * as userQueries from "#features/users/user.queries.js";
 import type { SignupBody, LoginBody } from "./auth.types.js";
 import { createToken } from "./auth.utils.js";

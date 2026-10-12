@@ -1,4 +1,5 @@
 import { prisma } from "../../db/prisma/prisma.js";
+import { userSelect } from "./user.select.js";
 
 const createUser = async (username: string, password: string) => {
   try {
@@ -29,4 +30,33 @@ const getUserByUsername = async (username: string) => {
   }
 };
 
-export { createUser, getUserByUsername };
+const getAllUsers = async (requesterId: string) => {
+  try {
+    const users = await prisma.user.findMany({
+      select: userSelect(requesterId),
+    });
+
+    return users;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+const getUserById = async (requesterId: string, userId: string) => {
+  try {
+    const user = await prisma.user.findMany({
+      where: {
+        id: userId,
+      },
+      select: userSelect(requesterId),
+    });
+
+    return user;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export { createUser, getUserByUsername, getAllUsers, getUserById };
