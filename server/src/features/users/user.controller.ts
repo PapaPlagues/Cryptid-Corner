@@ -68,4 +68,35 @@ const getCurrentUser = async (
   }
 };
 
-export { getAllUsers, getUser, getCurrentUser };
+const patchBio = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (!req.user) {
+    res.status(401).json({ error: "User is required " });
+    return;
+  }
+  try {
+    const userId = req.user.id;
+    const bio = req.body.bio;
+
+    const updatedUser = await userQueries.updateBio(userId, bio);
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const patchAvatar = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { getAllUsers, getUser, getCurrentUser, patchBio, patchAvatar };

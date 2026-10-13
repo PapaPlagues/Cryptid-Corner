@@ -6,7 +6,7 @@ const currentRouter = Router();
 
 currentRouter.get("/", authenticateToken, userController.getCurrentUser);
 
-// patch bio
-// patch avatar
+currentRouter.patch("/bio", authenticateToken, userController.patchBio);
+currentRouter.patch("/avatar", authenticateToken, userController.patchAvatar);
 
 export { currentRouter };

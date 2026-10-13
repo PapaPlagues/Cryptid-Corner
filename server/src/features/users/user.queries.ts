@@ -59,4 +59,22 @@ const getUserById = async (requesterId: string, userId: string) => {
   }
 };
 
-export { createUser, getUserByUsername, getAllUsers, getUserById };
+const updateBio = async (requesterId: string, bio: string) => {
+  try {
+    const user = await prisma.user.update({
+      data: {
+        bio,
+      },
+      where: {
+        id: requesterId,
+      },
+      select: userSelect(requesterId),
+    });
+    return user;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export { createUser, getUserByUsername, getAllUsers, getUserById, updateBio };
