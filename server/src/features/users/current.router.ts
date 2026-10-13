@@ -5,7 +5,6 @@ import { authenticateToken } from "#shared/middleware/handleVerifyToken.js";
 const currentRouter = Router();
 
 currentRouter.get("/", authenticateToken, userController.getCurrentUser);
-
 currentRouter.patch("/bio", authenticateToken, userController.patchBio);
 currentRouter.patch("/avatar", authenticateToken, userController.patchAvatar);
 

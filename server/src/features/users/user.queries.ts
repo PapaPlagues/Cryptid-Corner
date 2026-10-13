@@ -1,4 +1,4 @@
-import { prisma } from "../../db/prisma/prisma.js";
+import { prisma } from "#db/prisma/prisma.js";
 import { userSelect } from "./user.select.js";
 
 const createUser = async (username: string, password: string) => {

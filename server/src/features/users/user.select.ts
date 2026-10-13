@@ -7,4 +7,10 @@ const userSelect = (requesterId: string) => {
   };
 };
 
-export { userSelect };
+const USER_SELECT_BASIC = {
+  id: true,
+  username: true,
+  avatar: true,
+};
+
+export { userSelect, USER_SELECT_BASIC };
