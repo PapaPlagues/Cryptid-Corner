@@ -50,4 +50,22 @@ const getUser = async (
   }
 };
 
-export { getAllUsers, getUser };
+const getCurrentUser = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    if (!req.user) {
+      res.status(400).json({ error: "User is required" });
+      return;
+    }
+
+    const user = await userQueries.getUserById(req.user.id, req.user.id);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { getAllUsers, getUser, getCurrentUser };

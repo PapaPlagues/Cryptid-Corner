@@ -15,7 +15,8 @@
   "type": "module",
   "imports": {
     "#features/*": "./src/features/*",
-    "#db/*": "./src/db/*"
+    "#db/*": "./src/db/*",
+    "#shared/*": "./src/shared/*"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
