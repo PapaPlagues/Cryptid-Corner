@@ -1,7 +1,9 @@
 const HomePage = () => {
   return (
     <div>
-      <p>Welcome to Cryptid Corner!</p>
+      <div>
+        <p>HomePage</p>
+      </div>
     </div>
   );
 };
