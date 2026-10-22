@@ -15,7 +15,7 @@ const NavWrapper = ({ children }: NavWrapperProps) => {
       <header className="flex bg-card rounded-xl items-center m-5 p-8 justify-between">
         <div>
           <h1 className="font-heading text-3xl font-bold">
-            <span>CRYPTID</span> CORNER
+            <span className="primary">CRYPTID</span> CORNER
           </h1>
         </div>
 

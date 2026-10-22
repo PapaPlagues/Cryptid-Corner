@@ -10,55 +10,55 @@
   color-scheme: dark;
 
   /* Cryptid Corner - Core Colors */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #171719;
+  --foreground: #e8e4de;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card: #27272b;
+  --card-foreground: #e8e4de;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover: #27272b;
+  --popover-foreground: #e8e4de;
 
   /* Main brand red */
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #c62835;
+  --primary-foreground: #ffffff;
 
   /* Secondary surfaces */
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: #35353b;
+  --secondary-foreground: #e8e4de;
 
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted: #27272b;
+  --muted-foreground: #a5a5ad;
 
   /* Warm accent */
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: #e6a04b;
+  --accent-foreground: #171719;
 
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #c62835;
 
   /* Borders and form elements */
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #414147;
+  --input: #202023;
+  --ring: #e13a47;
 
   /* Charts */
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --chart-1: #c62835;
+  --chart-2: #e6a04b;
+  --chart-3: #e13a47;
+  --chart-4: #a5a5ad;
+  --chart-5: #414147;
 
   --radius: 0.625rem;
 
   /* Sidebar */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #171719;
+  --sidebar-foreground: #e8e4de;
+  --sidebar-primary: #c62835;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #35353b;
+  --sidebar-accent-foreground: #e8e4de;
+  --sidebar-border: #414147;
+  --sidebar-ring: #e13a47;
 }
 
 /* Tailwind utilities and shadcn token mappings */
