@@ -4,7 +4,7 @@ import { Image, RotateCw } from "lucide-react";
 const PostFeedView = ({ posts }) => {
   return (
     <div className="flex flex-1 flex-col min-w-0 px-15 py-4">
-      <header className="flex flex-col gap-4 border-b pb-4">
+      <section className="flex flex-col gap-4 border-b pb-4">
         {/* Feed heading */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
@@ -29,12 +29,12 @@ const PostFeedView = ({ posts }) => {
         <div className="flex flex-col gap-3">
           <Input
             placeholder="Share a sighting or story..."
-            className="border-border bg-background text-sm shadow-sm transition-shadow"
+            className="border-border bg-background text-sm shadow-sm transition-shadow py-5"
           />
 
           <div className="flex items-center justify-between">
             <button type="button" aria-label="Add an image">
-              <Image size={30} color="#e6a04b" />
+              <Image size={25} color="#e6a04b" />
             </button>
 
             <div className="flex items-center gap-3">
@@ -46,12 +46,12 @@ const PostFeedView = ({ posts }) => {
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* Posts */}
-      <main>
-        <p>Posts</p>
-      </main>
+      <section className="mt-2">
+        <p>Follow users to view their posts here or create your own posts!</p>
+      </section>
     </div>
   );
 };
