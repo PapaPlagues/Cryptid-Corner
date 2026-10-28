@@ -6,7 +6,12 @@ import { currentRouter } from "#features/users/current.router.js";
 import { postRouter } from "#features/posts/post.router.js";
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

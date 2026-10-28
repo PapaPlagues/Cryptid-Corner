@@ -1,5 +1,6 @@
 import { Input } from "@/shared/components/ui/input.js";
 import { Image, RotateCw } from "lucide-react";
+import { Posts } from "@/features/posts/components/Posts.js";
 
 const PostFeedView = ({ posts }) => {
   return (
@@ -50,7 +51,7 @@ const PostFeedView = ({ posts }) => {
 
       {/* Posts */}
       <section className="mt-2">
-        <p>Follow users to view their posts here or create your own posts!</p>
+        <Posts posts={posts} />
       </section>
     </div>
   );
