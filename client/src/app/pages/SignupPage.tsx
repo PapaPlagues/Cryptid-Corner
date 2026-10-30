@@ -1,7 +1,12 @@
+import { AuthFormWrapper } from "@/features/auth/components/AuthFormWrapper.js";
+import { Signup } from "@/features/auth/components/Signup.js";
+
 const SignupPage = () => {
   return (
     <div>
-      <p>Sign up page!</p>
+      <AuthFormWrapper variant="card">
+        <Signup />
+      </AuthFormWrapper>
     </div>
   );
 };
