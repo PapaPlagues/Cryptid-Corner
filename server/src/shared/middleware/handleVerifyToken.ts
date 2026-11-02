@@ -7,10 +7,7 @@ export const authenticateToken = (
   res: Response,
   next: NextFunction,
 ) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader?.startsWith("Bearer ")
-    ? authHeader.slice(7)
-    : undefined;
+  const token = req.cookies.token;
 
   if (!token) {
     res.status(401).json({ error: "Authentication required" });

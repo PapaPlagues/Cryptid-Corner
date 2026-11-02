@@ -9,7 +9,7 @@ const LoginPage = () => {
         <Login />
       </AuthFormWrapper>
 
-      <aside className="relative hidden min-h-screen overflow-hidden bg-card lg:block">
+      <aside className="relative hidden min-h-screen overflow-hidden border-l border-border bg-card lg:block">
         <LoginImageCarousel />
       </aside>
     </div>

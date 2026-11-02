@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import * as userQueries from "#features/users/user.queries.js";
 import type { SignupBody, LoginBody } from "./auth.types.js";
-import { createToken } from "./auth.utils.js";
+import { createToken, setAuthCookie } from "./auth.utils.js";
 
 const signup = async (
   req: Request<{}, {}, SignupBody>,
@@ -35,20 +35,21 @@ const login = async (
 
     const user = await userQueries.getUserByUsername(username);
     if (!user) {
-      throw new Error("no user");
+      throw new Error("Invalid username or password");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new Error("not matching");
+      throw new Error("Invalid username or password");
     }
 
     const token = createToken(user);
+    setAuthCookie(res, token);
 
     res.json({
       id: user.id,
       username: user.username,
-      token,
+      avatar: user.avatar,
     });
   } catch (err) {
     console.error(err);
@@ -67,11 +68,12 @@ const loginGuest = async (req: Request, res: Response, next: NextFunction) => {
     if (!guest) throw new Error();
 
     const token = createToken(guest);
+    setAuthCookie(res, token);
 
     res.json({
       id: guest.id,
       username: guest.username,
-      token,
+      avatar: guest.avatar,
     });
   } catch (err) {
     console.error(err);

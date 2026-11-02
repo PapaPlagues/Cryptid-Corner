@@ -1,42 +1,91 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router";
 import {
   Field,
-  FieldContent,
   FieldDescription,
-  FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
-  FieldSeparator,
   FieldSet,
-  FieldTitle,
 } from "@/shared/components/ui/field.js";
 import { Input } from "@/shared/components/ui/input.js";
 import { Button } from "@/shared/components/ui/button.js";
+import { signup } from "@/features/auth/api/auth.api.js";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  // Update state when input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSignup = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      await signup({
+        username: formData.username,
+        password: formData.password,
+      });
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <>
-      <form className="space-y-6">
+    <div className="space-y-8">
+      {/* Signup Introduction */}
+      <div>
+        <h2 className="text-center font-heading text-2xl font-semibold leading-tight">
+          Find your kind of weird.
+        </h2>
+      </div>
+
+      <form onSubmit={handleSignup} className="space-y-8">
         <FieldSet>
-          <FieldGroup>
+          <FieldGroup className="gap-6">
             <Field>
               <FieldLabel htmlFor="username">Username</FieldLabel>
               <Input
+                className="h-11 border-accent/30 bg-accent/5 placeholder:text-muted-foreground focus-visible:ring-ring"
+                type="text"
                 id="username"
                 name="username"
-                type="text"
-                placeholder="Enter your username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Enter username"
                 required
               />
+              <FieldDescription className="text-xs">
+                Choose a unique username for your account.
+              </FieldDescription>
             </Field>
 
             <Field>
-              <FieldLabel>Password</FieldLabel>
+              <FieldLabel htmlFor="password">Password</FieldLabel>
               <Input
+                className="h-11 border-accent/30 bg-accent/5 placeholder:text-muted-foreground focus-visible:ring-ring"
+                type="password"
                 id="password"
                 name="password"
-                type="password"
-                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter password"
                 required
               />
             </Field>
@@ -44,31 +93,35 @@ const Signup = () => {
             <Field>
               <FieldLabel>Confirm Password</FieldLabel>
               <Input
+                className="h-11 border-accent/30 bg-accent/5 placeholder:text-muted-foreground focus-visible:ring-ring"
+                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                type="password"
-                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm password"
                 required
               />
             </Field>
           </FieldGroup>
         </FieldSet>
-        <Field>
+
+        <div className="space-y-6">
           <Button type="submit" className="w-full">
             Sign Up
           </Button>
-          <p>
+          <p className="text-center text-sm text-text-secondary">
             Already have an account?{" "}
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="font-medium text-primary transition-colors hover:text-ring hover:underline"
             >
               Log in.
-            </a>
+            </Link>
           </p>
-        </Field>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

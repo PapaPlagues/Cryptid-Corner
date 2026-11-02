@@ -1,19 +1,36 @@
-const AuthFormWrapper = ({ children, variant = "default" }) => {
+import type { ReactNode } from "react";
+
+type AuthFormWrapperProps = {
+  children: ReactNode;
+  variant?: "default" | "card";
+};
+
+const AuthFormWrapper = ({
+  children,
+  variant = "default",
+}: AuthFormWrapperProps) => {
   return (
     <main>
-      <section className="flex min-h-screen items-center justify-center px-6 py-12 sm:px-12 ">
+      <section className="flex min-h-screen items-center justify-center px-5 py-10 sm:px-10 lg:px-12 xl:px-16">
         <div
-          className={`w-full max-w-md space-y-9 ${variant === "card" ? "bg-card p-10 rounded-2xl" : ""}`}
+          className={`w-full ${
+            variant === "card"
+              ? "max-w-lg rounded-xl border border-border bg-card p-6 shadow-2xl shadow-black/20 sm:p-9"
+              : "max-w-sm"
+          } space-y-8`}
         >
           {/* Brand */}
-          <header className="space-y-2">
-            <h1 className="font-heading text-3xl font-bold tracking-wide">
+          <header className="space-y-1.5">
+            <h1 className="font-heading text-2xl font-bold leading-none">
               <span className="text-primary">CRYPTID</span> CORNER
             </h1>
-            <p className="text-sm text-text-secondary">
+            <p className="text-sm leading-relaxed text-text-secondary">
               A community for the curious.
             </p>
           </header>
+
+          {/* Separator */}
+          {variant === "card" && <div className="border-t border-border" />}
 
           {children}
         </div>

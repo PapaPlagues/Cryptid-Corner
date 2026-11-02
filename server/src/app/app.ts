@@ -1,5 +1,7 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
+import { origin } from "../config/corsOriginList.js";
 import { authRouter } from "#features/auth/auth.router.js";
 import { userRouter } from "#features/users/user.router.js";
 import { currentRouter } from "#features/users/current.router.js";
@@ -8,13 +10,15 @@ import { postRouter } from "#features/posts/post.router.js";
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: origin,
     credentials: true,
   }),
 );
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRouter);

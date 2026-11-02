@@ -22,7 +22,7 @@ const LoginImageCarousel = () => {
             />
 
             {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/35 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent" />
 
             {/* Image Caption */}
