@@ -68,6 +68,11 @@ const Signup = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                minLength={1}
+                maxLength={36}
+                autoCapitalize="off"
+                autoCorrect="off"
+                autoComplete="off"
                 placeholder="Enter username"
                 required
               />
@@ -85,6 +90,8 @@ const Signup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                minLength={1}
+                maxLength={36}
                 placeholder="Enter password"
                 required
               />
@@ -99,6 +106,8 @@ const Signup = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                minLength={1}
+                maxLength={36}
                 placeholder="Confirm password"
                 required
               />
