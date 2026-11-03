@@ -14,7 +14,12 @@ const login = async (data: SignupData) => {
   return json;
 };
 
-const guestLogin = async () => {};
+const guestLogin = async () => {
+  const data = await request("api/auth/guest-login", {
+    method: "POST",
+  });
+  return data;
+};
 
 const signup = async (data: SignupData) => {
   const json = await request("api/auth/signup", {
@@ -25,4 +30,10 @@ const signup = async (data: SignupData) => {
   return json;
 };
 
-export { login, signup };
+const logout = async () => {
+  return await request("api/auth/logout", {
+    method: "POST",
+  });
+};
+
+export { login, guestLogin, signup, logout };

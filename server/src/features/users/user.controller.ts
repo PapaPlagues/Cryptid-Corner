@@ -57,7 +57,7 @@ const getCurrentUser = async (
 ) => {
   try {
     if (!req.user) {
-      res.status(400).json({ error: "User is required" });
+      res.status(401).json({ error: "User is required" });
       return;
     }
 

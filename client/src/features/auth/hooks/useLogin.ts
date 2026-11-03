@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { login as requestLogin } from "@/features/auth/api/auth.api.js";
+import {
+  login as requestLogin,
+  guestLogin as requestGuestLogin,
+} from "@/features/auth/api/auth.api.js";
 type FormData = {
   username: string;
   password: string;
@@ -18,7 +21,17 @@ const useLogin = () => {
     }
   };
 
-  return { login, isLoading };
+  const loginGuest = async () => {
+    setIsLoading(true);
+    try {
+      const data = await requestGuestLogin();
+      return data;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { login, loginGuest, isLoading };
 };
 
 export { useLogin };

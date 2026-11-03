@@ -12,7 +12,7 @@ import React, { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, isLoading } = useLogin();
+  const { login, loginGuest, isLoading } = useLogin();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -34,6 +34,15 @@ const Login = () => {
         username: formData.username,
         password: formData.password,
       });
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    try {
+      await loginGuest();
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -88,6 +97,8 @@ const Login = () => {
 
           <Button
             type="button"
+            onClick={handleGuestLogin}
+            disabled={isLoading}
             variant="outline"
             className="w-full border-border bg-secondary text-foreground hover:bg-secondary/80 hover:text-foreground"
           >
