@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router";
 import { MainLayout } from "./layouts/MainLayout.js";
 import { HomePage } from "@/app/pages/HomePage.js";
+import { UserPage } from "@/app/pages/UserPage.js";
 import { LoginPage } from "@/app/pages/LoginPage.js";
 import { SignupPage } from "@/app/pages/SignupPage.js";
 import { ErrorPage } from "@/app/pages/ErrorPage.js";
@@ -9,7 +10,10 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <MainLayout />,
-    children: [{ index: true, element: <HomePage /> }],
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "/users/:userId", element: <UserPage /> },
+    ],
     errorElement: <ErrorPage />,
   },
   {

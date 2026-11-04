@@ -1,12 +1,6 @@
-import {
-  Moon,
-  Home,
-  MessageCircle,
-  User,
-  UserGroup,
-  SquarePen,
-} from "lucide-react";
-
+import { Home, MessageCircle, User, UserGroup, SquarePen } from "lucide-react";
+import { Link } from "react-router";
+import { useContext } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,16 +13,25 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/shared/components/ui/sidebar.js";
-
-const navItems = [
-  { title: "Home", icon: Home },
-  { title: "Messages", icon: MessageCircle },
-  { title: "Profile", icon: User },
-  { title: "Users", icon: UserGroup },
-  { title: "Edit", icon: SquarePen },
-];
+import { CurrentContext } from "@/features/auth/context/CurrentContext.js";
 
 const AppSidebar = () => {
+  const context = useContext(CurrentContext);
+
+  if (!context) {
+    throw new Error("AppSidebar must be inside CurrentProvider");
+  }
+
+  const { user } = context;
+
+  const navItems = [
+    { title: "Home", icon: Home, url: "/" },
+    { title: "Messages", icon: MessageCircle, url: "/" },
+    { title: "Profile", icon: User, url: `/users/${user?.id}` },
+    { title: "Users", icon: UserGroup, url: "/" },
+    { title: "Edit", icon: SquarePen, url: "/" },
+  ];
+
   return (
     <Sidebar className="w-50 flex items-c">
       <SidebarHeader className="items-center pt-6">
@@ -47,7 +50,10 @@ const AppSidebar = () => {
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton tooltip={item.title}>
+                  <SidebarMenuButton
+                    tooltip={item.title}
+                    render={<Link to={item.url} />}
+                  >
                     <item.icon />
                     <span>{item.title}</span>
                   </SidebarMenuButton>

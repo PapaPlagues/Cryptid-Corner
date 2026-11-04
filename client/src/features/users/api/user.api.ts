@@ -8,11 +8,21 @@ type User = {
 };
 
 const fetchCurrent = async (signal?: AbortSignal): Promise<User> => {
-  return await request("api/current", {
+  const data = await request("api/current", {
     method: "GET",
     signal,
   });
+  return data;
 };
 
-export { fetchCurrent };
+const fetchUser = async (userId: string, signal?: AbortSignal) => {
+  const data = await request(`api/users/${userId}`, {
+    method: "GET",
+    signal,
+  });
+
+  return data;
+};
+
+export { fetchCurrent, fetchUser };
 export type { User };

@@ -45,7 +45,7 @@ const getAllUsers = async (requesterId: string) => {
 
 const getUserById = async (requesterId: string, userId: string) => {
   try {
-    const user = await prisma.user.findMany({
+    const user = await prisma.user.findUnique({
       where: {
         id: userId,
       },
