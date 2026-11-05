@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchCurrent, type User } from "@/features/users/api/user.api.js";
+import { fetchCurrent } from "@/features/users/api/user.api.js";
+import type { User } from "@/shared/types/user.types.js";
 
 const useCurrent = () => {
   const [user, setUser] = useState<User | null>(null);

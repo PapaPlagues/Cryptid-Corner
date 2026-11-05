@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { User } from "@/features/users/api/user.api.js";
+import type { User } from "@/shared/types/user.types.js";
 import { fetchUser } from "@/features/users/api/user.api.js";
 
 const useUser = (userId: string) => {

@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import type { User } from "@/features/users/api/user.api.js";
+import type { User } from "@/shared/types/user.types.js";
 
 type CurrentContextType = {
   user: User | null;

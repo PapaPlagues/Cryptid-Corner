@@ -1,11 +1,5 @@
 import { request } from "@/shared/services/request.js";
-
-type User = {
-  id: string;
-  username: string;
-  bio: string | null;
-  avatar: string | null;
-};
+import type { User } from "@/shared/types/user.types.js";
 
 const fetchCurrent = async (signal?: AbortSignal): Promise<User> => {
   const data = await request("api/current", {
@@ -27,5 +21,12 @@ const fetchUser = async (
   return data;
 };
 
-export { fetchCurrent, fetchUser };
-export type { User };
+const fetchUsers = async () => {
+  const data = await request("api/users", {
+    method: "GET",
+  });
+
+  return data;
+};
+
+export { fetchCurrent, fetchUser, fetchUsers };
