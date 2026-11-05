@@ -15,7 +15,10 @@ const fetchCurrent = async (signal?: AbortSignal): Promise<User> => {
   return data;
 };
 
-const fetchUser = async (userId: string, signal?: AbortSignal) => {
+const fetchUser = async (
+  userId: string,
+  signal?: AbortSignal,
+): Promise<User | null> => {
   const data = await request(`api/users/${userId}`, {
     method: "GET",
     signal,
