@@ -1,6 +1,13 @@
-import { Home, MessageCircle, User, UserGroup, SquarePen } from "lucide-react";
-import { Link } from "react-router";
-import { useContext } from "react";
+import {
+  Home,
+  MessageCircle,
+  User,
+  UserGroup,
+  SquarePen,
+  LogOut,
+} from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { useAuthStore } from "@/features/auth/stores/auth.store.js";
 import {
   Sidebar,
   SidebarContent,
@@ -13,16 +20,17 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/shared/components/ui/sidebar.js";
-import { CurrentContext } from "@/features/auth/context/CurrentContext.js";
 
 const AppSidebar = () => {
-  const context = useContext(CurrentContext);
+  const navigate = useNavigate();
 
-  if (!context) {
-    throw new Error("AppSidebar must be inside CurrentProvider");
-  }
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
-  const { user } = context;
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   const navItems = [
     { title: "Home", icon: Home, url: "/" },
@@ -64,7 +72,18 @@ const AppSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter />
+      <SidebarFooter>
+        {user && (
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip="Logout" onClick={handleLogout}>
+                <LogOut />
+                <span>Logout</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        )}
+      </SidebarFooter>
     </Sidebar>
   );
 };

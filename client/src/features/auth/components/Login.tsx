@@ -7,12 +7,15 @@ import {
 import { Input } from "@/shared/components/ui/input.js";
 import { Button } from "@/shared/components/ui/button.js";
 import { Link, useNavigate } from "react-router";
-import { useLogin } from "@/features/auth/hooks/useLogin.js";
 import React, { useState } from "react";
+import { useAuthStore } from "../stores/auth.store";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, loginGuest, isLoading } = useLogin();
+  const login = useAuthStore((state) => state.login);
+  const loginGuest = useAuthStore((state) => state.loginGuest);
+  const isLoggingIn = useAuthStore((state) => state.isLoggingIn);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -43,7 +46,7 @@ const Login = () => {
   const handleGuestLogin = async () => {
     try {
       await loginGuest();
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (err) {
       console.error(err);
     }
@@ -98,7 +101,7 @@ const Login = () => {
           <Button
             type="button"
             onClick={handleGuestLogin}
-            disabled={isLoading}
+            disabled={isLoggingIn}
             variant="outline"
             className="w-full border-border bg-secondary text-foreground hover:bg-secondary/80 hover:text-foreground"
           >
