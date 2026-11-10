@@ -1,5 +1,6 @@
 import type { User } from "@/shared/types/user.types.js";
 import { UserInfo } from "@/features/users/components/UserInfo.js";
+import { UserPosts } from "@/features/users/components/UserPosts.js";
 
 type UserProfileProps = {
   user: User | null;
@@ -15,7 +16,7 @@ const UserProfileView = ({ user, isLoadingUser }: UserProfileProps) => {
       {/* User  */}
       <UserInfo user={user} isLoadingUser={isLoadingUser} />
       {/* Posts */}
-      <p>Posts</p>
+      <UserPosts />
     </div>
   );
 };

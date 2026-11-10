@@ -1,4 +1,5 @@
 import { PostFeed } from "@/features/posts/components/PostFeed/";
+import { UsersAside } from "@/features/users/components/UsersAside";
 
 const HomePage = () => {
   return (
@@ -7,8 +8,8 @@ const HomePage = () => {
         <PostFeed />
       </section>
 
-      <aside className="main-container mt-4 hidden h-60 w-full max-w-64 xl:col-start-3 xl:row-start-1 xl:mt-0 xl:ml-6 xl:flex">
-        Users Aside
+      <aside className="main-container mt-4 hidden h-fit w-full max-w-64 xl:col-start-3 xl:row-start-1 xl:ml-6 xl:flex">
+        <UsersAside />
       </aside>
     </div>
   );

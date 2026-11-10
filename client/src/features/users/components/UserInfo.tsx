@@ -30,11 +30,11 @@ const UserInfo = ({ user, isLoadingUser }: UserInfoProps) => {
   return (
     <header className="flex flex-col gap-4">
       {/* Username */}
-      <Card className="rounded-lg border-0 bg-transparent px-2 py-1 shadow-none">
+      <div className="rounded-lg bg-transparent px-2 py-1 shadow-none">
         <h2 className="text-center font-heading text-xl text-foreground md:text-2xl">
           {user.username}
         </h2>
-      </Card>
+      </div>
 
       {/* Avatar, stats, and actions */}
       <div className="grid grid-cols-6 gap-3 md:grid-cols-8">
