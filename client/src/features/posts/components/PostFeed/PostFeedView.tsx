@@ -4,7 +4,7 @@ import { Posts } from "@/features/posts/components/Posts.js";
 
 const PostFeedView = ({ posts }) => {
   return (
-    <div className="flex flex-1 flex-col min-w-0 px-15 py-4">
+    <div className="flex min-w-0 flex-1 flex-col">
       <section className="flex flex-col gap-4 border-b pb-4">
         {/* Feed heading */}
         <div className="flex items-center justify-between">

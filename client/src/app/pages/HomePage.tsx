@@ -2,14 +2,12 @@ import { PostFeed } from "@/features/posts/components/PostFeed/";
 
 const HomePage = () => {
   return (
-    <div className="flex h-full w-full justify-between">
-      <div className="flex w-full flex-1 justify-center">
-        <section className="main-container mx-4 mt-3 mb-2 max-w-3xl flex-1  flex-col">
-          <PostFeed />
-        </section>
-      </div>
+    <div className="grid min-w-0 w-full flex-1 grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,40rem)_minmax(0,1fr)]">
+      <section className="main-container flex min-w-0 flex-col xl:col-start-2">
+        <PostFeed />
+      </section>
 
-      <aside className="main-container mt-3 mb-2 hidden md:flex md:flex md:w-[10rem] lg:w-xs h-60">
+      <aside className="main-container mt-4 hidden h-60 w-full max-w-64 xl:col-start-3 xl:row-start-1 xl:mt-0 xl:ml-6 xl:flex">
         Users Aside
       </aside>
     </div>

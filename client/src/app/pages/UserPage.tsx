@@ -9,11 +9,9 @@ const UserPage = () => {
   }
 
   return (
-    <div className="flex h-full w-full justify-center">
-      <div className="flex w-full flex-1 justify-center">
-        <div className="main-container mx-4 mt-3 mb-2 max-w-3xl flex-1  flex-col">
-          <UserProfile userId={userId} />
-        </div>
+    <div className="grid min-w-0 w-full flex-1 grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,40rem)_minmax(0,1fr)]">
+      <div className="main-container flex min-w-0 flex-col xl:col-start-2">
+        <UserProfile userId={userId} />
       </div>
     </div>
   );
