@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import type { User } from "@/shared/types/user.types.js";
-import { fetchUsers, fetchUser } from "@/features/users/api/user.api.js";
+import {
+  fetchUsers,
+  fetchUser,
+  patchUserBio,
+} from "@/features/users/api/user.api.js";
 
 type UserState = {
   users: User[];
@@ -10,6 +14,9 @@ type UserState = {
 
   getUsers: () => Promise<void>;
   getUser: (userId: string) => Promise<void>;
+
+  isEditingBio: boolean;
+  editBio: (bio: string) => Promise<User>;
 };
 
 const useUserStore = create<UserState>((set) => ({
@@ -42,6 +49,24 @@ const useUserStore = create<UserState>((set) => ({
       set({ selectedUser: null });
     } finally {
       set({ isLoadingUser: false });
+    }
+  },
+
+  isEditingBio: false,
+
+  editBio: async (bio) => {
+    set({ isEditingBio: true });
+
+    try {
+      const updatedUser = await patchUserBio(bio);
+      set((state) =>
+        state.selectedUser?.id === updatedUser.id
+          ? { selectedUser: updatedUser }
+          : {},
+      );
+      return updatedUser;
+    } finally {
+      set({ isEditingBio: false });
     }
   },
 }));

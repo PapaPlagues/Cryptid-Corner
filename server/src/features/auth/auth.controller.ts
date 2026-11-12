@@ -18,6 +18,7 @@ const signup = async (
     res.json({
       id: user.id,
       username: user.username,
+      bio: user.bio,
       avatar: user.avatar,
     });
   } catch (err) {
@@ -49,6 +50,7 @@ const login = async (
     res.json({
       id: user.id,
       username: user.username,
+      bio: user.bio,
       avatar: user.avatar,
     });
   } catch (err) {
@@ -73,6 +75,7 @@ const loginGuest = async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       id: guest.id,
       username: guest.username,
+      bio: guest.bio,
       avatar: guest.avatar,
     });
   } catch (err) {

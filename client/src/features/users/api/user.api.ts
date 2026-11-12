@@ -29,4 +29,25 @@ const fetchUsers = async () => {
   return data;
 };
 
-export { fetchCurrent, fetchUser, fetchUsers };
+const patchUserBio = async (bio: string): Promise<User> => {
+  const data = await request("api/current/bio", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      bio,
+    }),
+  });
+  return data;
+};
+
+const patchUserAvatar = async (fileFormData: FormData) => {
+  const data = await request(`/current/avatar`, {
+    method: "PATCH",
+    body: fileFormData,
+  });
+  return data;
+};
+
+export { fetchCurrent, fetchUser, fetchUsers, patchUserBio, patchUserAvatar };

@@ -37,7 +37,7 @@ const AppSidebar = () => {
     { title: "Messages", icon: MessageCircle, url: "/" },
     { title: "Profile", icon: User, url: `/users/${user?.id}` },
     { title: "Users", icon: UserGroup, url: "/users" },
-    { title: "Edit", icon: SquarePen, url: "/" },
+    { title: "Edit", icon: SquarePen, url: "/settings" },
   ];
 
   return (

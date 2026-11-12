@@ -10,6 +10,7 @@ import { UserPage } from "@/app/pages/UserPage.js";
 import { LoginPage } from "@/app/pages/LoginPage.js";
 import { SignupPage } from "@/app/pages/SignupPage.js";
 import { ErrorPage } from "@/app/pages/ErrorPage.js";
+import { SettingsPage } from "@/app/pages/SettingsPage.js";
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +24,7 @@ const routes: RouteObject[] = [
           { index: true, element: <HomePage /> },
           { path: "/users", element: <UsersPage /> },
           { path: "/users/:userId", element: <UserPage /> },
+          { path: "/settings", element: <SettingsPage /> },
         ],
       },
     ],
