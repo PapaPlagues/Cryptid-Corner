@@ -77,4 +77,29 @@ const updateBio = async (requesterId: string, bio: string) => {
   }
 };
 
-export { createUser, getUserByUsername, getAllUsers, getUserById, updateBio };
+const updateAvatar = async (requesterId: string, avatarSrc: string) => {
+  try {
+    const user = await prisma.user.update({
+      data: {
+        avatar: avatarSrc,
+      },
+      where: {
+        id: requesterId,
+      },
+      select: userSelect(requesterId),
+    });
+    return user;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export {
+  createUser,
+  getUserByUsername,
+  getAllUsers,
+  getUserById,
+  updateBio,
+  updateAvatar,
+};

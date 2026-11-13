@@ -1,20 +1,24 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/shared/components/ui/avatar.js";
-import { Button } from "@/shared/components/ui/button.js";
 import { EditBioSection } from "@/features/users/components/Settings/EditBioSection.js";
 import { EditAvatarSection } from "@/features/users/components/Settings/EditAvatarSection.js";
 import type { User } from "@/shared/types/user.types.js";
 
 type SettingsViewProps = {
   user: User | null;
+  isLoadingUser: boolean;
   editBio: (bio: string) => Promise<void>;
   isEditingBio: boolean;
+  uploadAvatar: (file: File) => Promise<void>;
+  isUploadingAvatar: boolean;
 };
 
-const SettingsView = ({ user, editBio, isEditingBio }: SettingsViewProps) => {
+const SettingsView = ({
+  user,
+  isLoadingUser,
+  editBio,
+  isEditingBio,
+  uploadAvatar,
+  isUploadingAvatar,
+}: SettingsViewProps) => {
   if (!user) return null;
 
   return (
@@ -39,7 +43,13 @@ const SettingsView = ({ user, editBio, isEditingBio }: SettingsViewProps) => {
         </div>
 
         {/* Avatar */}
-        <EditAvatarSection avatar={user.avatar} username={user.username} />
+        <EditAvatarSection
+          avatar={user.avatar}
+          username={user.username}
+          isLoadingUser={isLoadingUser}
+          uploadAvatar={uploadAvatar}
+          isUploadingAvatar={isUploadingAvatar}
+        />
 
         {/* Bio */}
         <EditBioSection

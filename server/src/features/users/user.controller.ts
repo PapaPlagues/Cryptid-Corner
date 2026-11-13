@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import { uploadAvatar } from "#shared/adapters/supabase.client.js";
 import * as userQueries from "#features/users/user.queries.js";
 
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
@@ -94,6 +95,20 @@ const patchAvatar = async (
   next: NextFunction,
 ) => {
   try {
+    if (!req.user) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const userId = req.user.id;
+
+    if (!req.file) {
+      res.status(401).json({ error: "No avatar file was provided" });
+      return;
+    }
+
+    const url = await uploadAvatar(userId, req.file);
+    const user = await userQueries.updateAvatar(userId, url);
+    res.json(user);
   } catch (err) {
     next(err);
   }

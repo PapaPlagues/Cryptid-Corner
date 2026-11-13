@@ -4,6 +4,7 @@ import {
   fetchUsers,
   fetchUser,
   patchUserBio,
+  patchUserAvatar,
 } from "@/features/users/api/user.api.js";
 
 type UserState = {
@@ -17,6 +18,9 @@ type UserState = {
 
   isEditingBio: boolean;
   editBio: (bio: string) => Promise<User>;
+
+  isUploadingAvatar: boolean;
+  uploadAvatar: (fileFormData: FormData) => Promise<User>;
 };
 
 const useUserStore = create<UserState>((set) => ({
@@ -67,6 +71,24 @@ const useUserStore = create<UserState>((set) => ({
       return updatedUser;
     } finally {
       set({ isEditingBio: false });
+    }
+  },
+
+  isUploadingAvatar: false,
+
+  uploadAvatar: async (fileFormData) => {
+    set({ isUploadingAvatar: true });
+
+    try {
+      const updatedUser = await patchUserAvatar(fileFormData);
+      set((state) =>
+        state.selectedUser?.id === updatedUser.id
+          ? { selectedUser: updatedUser }
+          : {},
+      );
+      return updatedUser;
+    } finally {
+      set({ isUploadingAvatar: false });
     }
   },
 }));

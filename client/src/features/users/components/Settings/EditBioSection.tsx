@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { Label } from "@/shared/components/ui/label.js";
 import { Textarea } from "@/shared/components/ui/textarea.js";
 import { Button } from "@/shared/components/ui/button.js";

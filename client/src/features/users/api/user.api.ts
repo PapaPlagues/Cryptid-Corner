@@ -43,7 +43,7 @@ const patchUserBio = async (bio: string): Promise<User> => {
 };
 
 const patchUserAvatar = async (fileFormData: FormData) => {
-  const data = await request(`/current/avatar`, {
+  const data = await request(`api/current/avatar`, {
     method: "PATCH",
     body: fileFormData,
   });
