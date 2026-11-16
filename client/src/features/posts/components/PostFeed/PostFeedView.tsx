@@ -1,8 +1,13 @@
 import { Input } from "@/shared/components/ui/input.js";
 import { Image, RotateCw } from "lucide-react";
 import { Posts } from "@/features/posts/components/Posts.js";
+import type { Post } from "@/shared/types/post.types.js";
 
-const PostFeedView = ({ posts }) => {
+type PostFeedProps = {
+  posts: Post[];
+};
+
+const PostFeedView = ({ posts }: PostFeedProps) => {
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <section className="flex flex-col gap-4 border-b pb-4">
@@ -50,7 +55,7 @@ const PostFeedView = ({ posts }) => {
       </section>
 
       {/* Posts */}
-      <section className="mt-2">
+      <section className="mt-5">
         <Posts posts={posts} />
       </section>
     </div>

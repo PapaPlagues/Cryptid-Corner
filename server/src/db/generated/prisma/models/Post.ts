@@ -26,7 +26,6 @@ export type AggregatePost = {
 
 export type PostMinAggregateOutputType = {
   id: string | null
-  title: string | null
   content: string | null
   media: string | null
   isSelfHosted: boolean | null
@@ -36,7 +35,6 @@ export type PostMinAggregateOutputType = {
 
 export type PostMaxAggregateOutputType = {
   id: string | null
-  title: string | null
   content: string | null
   media: string | null
   isSelfHosted: boolean | null
@@ -46,7 +44,6 @@ export type PostMaxAggregateOutputType = {
 
 export type PostCountAggregateOutputType = {
   id: number
-  title: number
   content: number
   media: number
   isSelfHosted: number
@@ -58,7 +55,6 @@ export type PostCountAggregateOutputType = {
 
 export type PostMinAggregateInputType = {
   id?: true
-  title?: true
   content?: true
   media?: true
   isSelfHosted?: true
@@ -68,7 +64,6 @@ export type PostMinAggregateInputType = {
 
 export type PostMaxAggregateInputType = {
   id?: true
-  title?: true
   content?: true
   media?: true
   isSelfHosted?: true
@@ -78,7 +73,6 @@ export type PostMaxAggregateInputType = {
 
 export type PostCountAggregateInputType = {
   id?: true
-  title?: true
   content?: true
   media?: true
   isSelfHosted?: true
@@ -161,7 +155,6 @@ export type PostGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type PostGroupByOutputType = {
   id: string
-  title: string
   content: string
   media: string | null
   isSelfHosted: boolean
@@ -192,7 +185,6 @@ export type PostWhereInput = {
   OR?: Prisma.PostWhereInput[]
   NOT?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
   id?: Prisma.StringFilter<"Post"> | string
-  title?: Prisma.StringFilter<"Post"> | string
   content?: Prisma.StringFilter<"Post"> | string
   media?: Prisma.StringNullableFilter<"Post"> | string | null
   isSelfHosted?: Prisma.BoolFilter<"Post"> | boolean
@@ -205,7 +197,6 @@ export type PostWhereInput = {
 
 export type PostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrderInput | Prisma.SortOrder
   isSelfHosted?: Prisma.SortOrder
@@ -221,7 +212,6 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
   OR?: Prisma.PostWhereInput[]
   NOT?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
-  title?: Prisma.StringFilter<"Post"> | string
   content?: Prisma.StringFilter<"Post"> | string
   media?: Prisma.StringNullableFilter<"Post"> | string | null
   isSelfHosted?: Prisma.BoolFilter<"Post"> | boolean
@@ -234,7 +224,6 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
 
 export type PostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrderInput | Prisma.SortOrder
   isSelfHosted?: Prisma.SortOrder
@@ -250,7 +239,6 @@ export type PostScalarWhereWithAggregatesInput = {
   OR?: Prisma.PostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PostScalarWhereWithAggregatesInput | Prisma.PostScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Post"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Post"> | string
   content?: Prisma.StringWithAggregatesFilter<"Post"> | string
   media?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   isSelfHosted?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
@@ -260,7 +248,6 @@ export type PostScalarWhereWithAggregatesInput = {
 
 export type PostCreateInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -272,7 +259,6 @@ export type PostCreateInput = {
 
 export type PostUncheckedCreateInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -284,7 +270,6 @@ export type PostUncheckedCreateInput = {
 
 export type PostUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -296,7 +281,6 @@ export type PostUpdateInput = {
 
 export type PostUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -308,7 +292,6 @@ export type PostUncheckedUpdateInput = {
 
 export type PostCreateManyInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -318,7 +301,6 @@ export type PostCreateManyInput = {
 
 export type PostUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -327,7 +309,6 @@ export type PostUpdateManyMutationInput = {
 
 export type PostUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -347,7 +328,6 @@ export type PostOrderByRelationAggregateInput = {
 
 export type PostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
   isSelfHosted?: Prisma.SortOrder
@@ -357,7 +337,6 @@ export type PostCountOrderByAggregateInput = {
 
 export type PostMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
   isSelfHosted?: Prisma.SortOrder
@@ -367,7 +346,6 @@ export type PostMaxOrderByAggregateInput = {
 
 export type PostMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
   isSelfHosted?: Prisma.SortOrder
@@ -484,7 +462,6 @@ export type PostUpdateOneRequiredWithoutCommentsNestedInput = {
 
 export type PostCreateWithoutAuthorInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -495,7 +472,6 @@ export type PostCreateWithoutAuthorInput = {
 
 export type PostUncheckedCreateWithoutAuthorInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -516,7 +492,6 @@ export type PostCreateManyAuthorInputEnvelope = {
 
 export type PostCreateWithoutLikersInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -527,7 +502,6 @@ export type PostCreateWithoutLikersInput = {
 
 export type PostUncheckedCreateWithoutLikersInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -562,7 +536,6 @@ export type PostScalarWhereInput = {
   OR?: Prisma.PostScalarWhereInput[]
   NOT?: Prisma.PostScalarWhereInput | Prisma.PostScalarWhereInput[]
   id?: Prisma.StringFilter<"Post"> | string
-  title?: Prisma.StringFilter<"Post"> | string
   content?: Prisma.StringFilter<"Post"> | string
   media?: Prisma.StringNullableFilter<"Post"> | string | null
   isSelfHosted?: Prisma.BoolFilter<"Post"> | boolean
@@ -588,7 +561,6 @@ export type PostUpdateManyWithWhereWithoutLikersInput = {
 
 export type PostCreateWithoutCommentsInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -599,7 +571,6 @@ export type PostCreateWithoutCommentsInput = {
 
 export type PostUncheckedCreateWithoutCommentsInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -626,7 +597,6 @@ export type PostUpdateToOneWithWhereWithoutCommentsInput = {
 
 export type PostUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -637,7 +607,6 @@ export type PostUpdateWithoutCommentsInput = {
 
 export type PostUncheckedUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -648,7 +617,6 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
 
 export type PostCreateManyAuthorInput = {
   id?: string
-  title: string
   content: string
   media?: string | null
   isSelfHosted?: boolean
@@ -657,7 +625,6 @@ export type PostCreateManyAuthorInput = {
 
 export type PostUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -668,7 +635,6 @@ export type PostUpdateWithoutAuthorInput = {
 
 export type PostUncheckedUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -679,7 +645,6 @@ export type PostUncheckedUpdateWithoutAuthorInput = {
 
 export type PostUncheckedUpdateManyWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -688,7 +653,6 @@ export type PostUncheckedUpdateManyWithoutAuthorInput = {
 
 export type PostUpdateWithoutLikersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -699,7 +663,6 @@ export type PostUpdateWithoutLikersInput = {
 
 export type PostUncheckedUpdateWithoutLikersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -710,7 +673,6 @@ export type PostUncheckedUpdateWithoutLikersInput = {
 
 export type PostUncheckedUpdateManyWithoutLikersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isSelfHosted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -760,7 +722,6 @@ export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
 
 export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   content?: boolean
   media?: boolean
   isSelfHosted?: boolean
@@ -774,7 +735,6 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 
 export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   content?: boolean
   media?: boolean
   isSelfHosted?: boolean
@@ -785,7 +745,6 @@ export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   content?: boolean
   media?: boolean
   isSelfHosted?: boolean
@@ -796,7 +755,6 @@ export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type PostSelectScalar = {
   id?: boolean
-  title?: boolean
   content?: boolean
   media?: boolean
   isSelfHosted?: boolean
@@ -804,7 +762,7 @@ export type PostSelectScalar = {
   authorId?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "media" | "isSelfHosted" | "createdAt" | "authorId", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "media" | "isSelfHosted" | "createdAt" | "authorId", ExtArgs["result"]["post"]>
 export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   likers?: boolean | Prisma.Post$likersArgs<ExtArgs>
@@ -827,7 +785,6 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    title: string
     content: string
     media: string | null
     isSelfHosted: boolean
@@ -1260,7 +1217,6 @@ export interface Prisma__PostClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface PostFieldRefs {
   readonly id: Prisma.FieldRef<"Post", 'String'>
-  readonly title: Prisma.FieldRef<"Post", 'String'>
   readonly content: Prisma.FieldRef<"Post", 'String'>
   readonly media: Prisma.FieldRef<"Post", 'String'>
   readonly isSelfHosted: Prisma.FieldRef<"Post", 'Boolean'>

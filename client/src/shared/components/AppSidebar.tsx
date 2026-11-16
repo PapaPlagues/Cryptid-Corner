@@ -34,7 +34,7 @@ const AppSidebar = () => {
 
   const navItems = [
     { title: "Home", icon: Home, url: "/" },
-    { title: "Messages", icon: MessageCircle, url: "/" },
+    { title: "Messages", icon: MessageCircle, url: "/messages" },
     { title: "Profile", icon: User, url: `/users/${user?.id}` },
     { title: "Users", icon: UserGroup, url: "/users" },
     { title: "Edit", icon: SquarePen, url: "/settings" },

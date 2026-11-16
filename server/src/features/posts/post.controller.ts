@@ -30,10 +30,9 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
     const requesterId = requester.id;
 
-    const title = req.body.title;
     const content = req.body.content;
 
-    const post = await postQueries.createPost(requesterId, title, content);
+    const post = await postQueries.createPost(requesterId, content);
 
     res.json(post);
   } catch (err) {

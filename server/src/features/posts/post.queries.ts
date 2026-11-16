@@ -16,14 +16,12 @@ const getPosts = async (requesterId: string) => {
 
 const createPost = async (
   requesterId: string,
-  title: string,
   content: string,
   media = null,
 ) => {
   try {
     const data = await prisma.post.create({
       data: {
-        title,
         content,
         media,
         author: {
