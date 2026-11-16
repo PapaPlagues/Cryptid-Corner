@@ -1,7 +1,7 @@
-import { Input } from "@/shared/components/ui/input.js";
-import { Image, RotateCw } from "lucide-react";
+import { RotateCw } from "lucide-react";
 import { Posts } from "@/features/posts/components/Posts.js";
 import type { Post } from "@/shared/types/post.types.js";
+import { CreatePost } from "@/features/posts/components/CreatePost.js";
 
 type PostFeedProps = {
   posts: Post[];
@@ -32,26 +32,7 @@ const PostFeedView = ({ posts }: PostFeedProps) => {
         </div>
 
         {/* Create post */}
-        <div className="flex flex-col gap-3">
-          <Input
-            placeholder="Share a sighting or story..."
-            className="border-border bg-background text-sm shadow-sm transition-shadow py-5"
-          />
-
-          <div className="flex items-center justify-between">
-            <button type="button" aria-label="Add an image">
-              <Image size={25} color="#e6a04b" />
-            </button>
-
-            <div className="flex items-center gap-3">
-              <p>0/100</p>
-
-              <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-                Post
-              </button>
-            </div>
-          </div>
-        </div>
+        <CreatePost />
       </section>
 
       {/* Posts */}

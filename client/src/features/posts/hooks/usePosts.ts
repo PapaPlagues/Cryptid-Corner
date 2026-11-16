@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import { usePostStore } from "@/features/posts/stores/posts.store.js";
 
 const usePosts = () => {

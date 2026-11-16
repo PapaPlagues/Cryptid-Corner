@@ -1,20 +1,24 @@
 const SERVER_BASE_URL = import.meta.env.VITE_API_URI;
+import { request } from "@/shared/services/request.js";
 
-const fetchPosts = async () => {
-  const response = await fetch(`${SERVER_BASE_URL}/api/posts`, {
-    credentials: "include",
-  });
-
-  const json = await response.json();
-
-  if (!response.ok) {
-    const error = new Error();
-    error.name = json.name;
-    error.message = json.message;
-
-    throw error;
-  }
-  return json;
+export type CreatePostData = {
+  content: string;
 };
 
-export { fetchPosts };
+const fetchPosts = async () => {
+  const data = await request(`api/posts`, {
+    method: "GET",
+  });
+  return data;
+};
+
+const createPost = async (postData: CreatePostData) => {
+  const data = await request(`api/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(postData),
+  });
+  return data;
+};
+
+export { fetchPosts, createPost };

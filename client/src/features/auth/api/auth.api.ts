@@ -5,13 +5,13 @@ type SignupData = {
   password: string;
 };
 
-const login = async (data: SignupData) => {
-  const json = await request("api/auth/login", {
+const login = async (signupData: SignupData) => {
+  const data = await request("api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(signupData),
   });
-  return json;
+  return data;
 };
 
 const guestLogin = async () => {
@@ -21,13 +21,13 @@ const guestLogin = async () => {
   return data;
 };
 
-const signup = async (data: SignupData) => {
-  const json = await request("api/auth/signup", {
+const signup = async (signupData: SignupData) => {
+  const data = await request("api/auth/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(signupData),
   });
-  return json;
+  return data;
 };
 
 const logout = async () => {
