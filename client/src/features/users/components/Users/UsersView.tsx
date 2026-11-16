@@ -1,6 +1,7 @@
 import { UsersList } from "@/features/users/components/UsersList.js";
 import type { User } from "@/shared/types/user.types.js";
 import { Input } from "@/shared/components/ui/input.js";
+import { useState } from "react";
 
 type UsersViewProps = {
   users: User[];
@@ -9,6 +10,13 @@ type UsersViewProps = {
 };
 
 const UsersView = ({ users }: UsersViewProps) => {
+  const [filter, setFilter] = useState("");
+  const filteredUsers = users
+    ? users.filter((user) =>
+        user.username.toLowerCase().includes(filter.trim().toLowerCase()),
+      )
+    : [];
+
   return (
     <div className="flex flex-col gap-4">
       <section className="flex flex-col gap-4 border-b border-border/70 pb-5">
@@ -27,10 +35,13 @@ const UsersView = ({ users }: UsersViewProps) => {
         <Input
           placeholder="Search for a user"
           className="bg-background/70"
+          type="text"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
         />
       </section>
 
-      <UsersList users={users} />
+      <UsersList users={filteredUsers} />
     </div>
   );
 };
