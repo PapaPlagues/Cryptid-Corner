@@ -10,8 +10,15 @@ const getPosts = async (req: Request, res: Response, next: NextFunction) => {
       return;
     }
     const requesterId = requester.id;
-
-    const data = await postQueries.getPosts(requesterId);
+    const authorId = req.query.userId || req.params.userId;
+    const cursor = req.query.cursor ? req.query.cursor : null;
+    const limit = req.query.limit ? req.query.limit : 20;
+    const data = await postQueries.getPosts(
+      requesterId,
+      authorId,
+      cursor,
+      Number(limit),
+    );
     res.json(data);
   } catch (err) {
     console.error(err);

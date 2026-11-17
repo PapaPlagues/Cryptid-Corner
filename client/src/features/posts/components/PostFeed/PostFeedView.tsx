@@ -5,9 +5,21 @@ import { CreatePost } from "@/features/posts/components/CreatePost.js";
 
 type PostFeedProps = {
   posts: Post[];
+  isLoadingPosts: boolean;
+  isLoadingNextPage: boolean;
+  hasNextPage: boolean;
+  refetch: () => Promise<void>;
+  loadMore: () => Promise<void>;
 };
 
-const PostFeedView = ({ posts }: PostFeedProps) => {
+const PostFeedView = ({
+  posts,
+  isLoadingPosts,
+  isLoadingNextPage,
+  hasNextPage,
+  refetch,
+  loadMore,
+}: PostFeedProps) => {
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <section className="flex flex-col gap-4 border-b pb-4">
