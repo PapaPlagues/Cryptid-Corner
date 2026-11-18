@@ -6,7 +6,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
   const getPosts = usePostStore((state) => state.getPosts);
   const getNextPage = usePostStore((state) => state.getNextPage);
 
-  const isLoadingPosts = usePostStore((state) => state.isLoadingPosts);
+  const isLoadingInit = usePostStore((state) => state.isLoadingInit);
   const isLoadingNextPage = usePostStore((state) => state.isLoadingNextPage);
 
   const hasNextPage = usePostStore((state) => state.hasNextPage);
@@ -17,7 +17,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
 
   return {
     posts,
-    isLoadingPosts,
+    isLoadingInit,
     isLoadingNextPage,
     hasNextPage,
     refetch: () => getPosts(limit, userId),

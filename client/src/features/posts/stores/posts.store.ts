@@ -18,7 +18,7 @@ type PostState = {
   posts: Post[];
   hasNextPage: boolean;
   endCursor: string | null;
-  isLoadingPosts: boolean;
+  isLoadingInit: boolean;
   isLoadingNextPage: boolean;
   isCreatingPost: boolean;
 
@@ -31,12 +31,12 @@ const usePostStore = create<PostState>((set, get) => ({
   posts: [],
   hasNextPage: false,
   endCursor: null,
-  isLoadingPosts: false,
+  isLoadingInit: false,
   isLoadingNextPage: false,
   isCreatingPost: false,
 
   getPosts: async (limit = 20, userId = null) => {
-    set({ isLoadingPosts: true });
+    set({ isLoadingInit: true });
 
     try {
       const data: PostsResponse = await fetchPosts(null, limit, userId);
@@ -48,13 +48,13 @@ const usePostStore = create<PostState>((set, get) => ({
     } catch (err) {
       console.error(err);
     } finally {
-      set({ isLoadingPosts: false });
+      set({ isLoadingInit: false });
     }
   },
 
   getNextPage: async (limit = 20, userId = null) => {
     const { endCursor, hasNextPage, isLoadingNextPage } = get();
-    if (!hasNextPage || !endCursor || !isLoadingNextPage) return;
+    if (!hasNextPage || !endCursor || isLoadingNextPage) return;
     set({ isLoadingNextPage: true });
 
     try {

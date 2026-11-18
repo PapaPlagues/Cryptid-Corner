@@ -11,7 +11,9 @@ const fetchPosts = async (
   userId: string | null = null,
 ) => {
   const params = new URLSearchParams();
+
   params.append("limit", String(limit));
+
   if (cursor) params.append("cursor", cursor);
   if (userId) params.append("userId", userId);
 

@@ -11,11 +11,11 @@ type NavWrapperProps = {
 
 const NavWrapper = ({ children }: NavWrapperProps) => {
   return (
-    <SidebarProvider className="flex-col">
+    <SidebarProvider className="h-dvh overflow-hidden flex-col">
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
         <AppSidebar />
-        <SidebarInset className="min-w-0 flex-1">
-          <div className="mx-auto flex min-w-0 w-full max-w-6xl flex-1 px-4 py-3 sm:px-6 lg:px-8">
+        <SidebarInset className="min-h-0 min-w-0 flex-1 overflow-hidden">
+          <div className="mx-auto flex h-full min-h-0 min-w-0 w-full max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
             {children}
           </div>
         </SidebarInset>

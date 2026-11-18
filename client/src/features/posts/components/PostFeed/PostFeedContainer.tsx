@@ -3,7 +3,7 @@ import { usePosts } from "@/features/posts/hooks/usePosts.js";
 const PostFeedContainer = () => {
   const {
     posts,
-    isLoadingPosts,
+    isLoadingInit,
     isLoadingNextPage,
     hasNextPage,
     refetch,
@@ -13,7 +13,7 @@ const PostFeedContainer = () => {
   return (
     <PostFeedView
       posts={posts}
-      isLoadingPosts={isLoadingPosts}
+      isLoadingInit={isLoadingInit}
       isLoadingNextPage={isLoadingNextPage}
       hasNextPage={hasNextPage}
       refetch={refetch}

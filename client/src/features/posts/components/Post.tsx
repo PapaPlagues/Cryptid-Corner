@@ -12,17 +12,23 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
 import { Heart, MessageCircle, MoreHorizontal } from "lucide-react";
+import { PostSkeleton } from "@/features/posts/components/PostSkeleton.js";
 
 type PostProps = {
   post: PostType;
+  isLoadingInit: boolean;
 };
 
-const Post = ({ post }: PostProps) => {
+const Post = ({ post, isLoadingInit }: PostProps) => {
+  if (isLoadingInit) {
+    return <PostSkeleton />;
+  }
+
   return (
     <article className="rounded-xl border bg-secondary/40 shadow-sm overflow-hidden">
       <div className="p-4 space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Avatar>
               <AvatarImage src={post.author.avatar ?? undefined} />
@@ -51,7 +57,7 @@ const Post = ({ post }: PostProps) => {
               <DropdownMenuItem>Delete Post</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </header>
 
         {/* Content */}
         <div className="space-y-3">
@@ -70,7 +76,7 @@ const Post = ({ post }: PostProps) => {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center gap-2 border-t px-4 py-4">
+      <footer className="flex items-center gap-2 border-t px-4 py-4">
         <Button variant="ghost" size="sm" className="gap-2">
           <Heart className="h-4 w-4" />
           <span>0</span>
@@ -80,7 +86,7 @@ const Post = ({ post }: PostProps) => {
           <MessageCircle className="h-4 w-4" />
           <span>0</span>
         </Button>
-      </div>
+      </footer>
     </article>
   );
 };
