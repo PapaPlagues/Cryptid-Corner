@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { uploadAvatar } from "#shared/adapters/supabase.client.js";
 import * as userQueries from "#features/users/user.queries.js";
+import { formatUser } from "#features/users/user.service.js";
 
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -35,7 +36,6 @@ const getUser = async (
     }
 
     const requesterId = requester.id;
-
     const { userId } = req.params;
 
     if (!userId) {
@@ -44,8 +44,9 @@ const getUser = async (
     }
 
     const user = await userQueries.getUserById(requesterId, userId);
+    const formattedUser = formatUser(user);
 
-    res.json(user);
+    res.json(formattedUser);
   } catch (err) {
     next(err);
   }
@@ -63,7 +64,9 @@ const getCurrentUser = async (
     }
 
     const user = await userQueries.getUserById(req.user.id, req.user.id);
-    res.json(user);
+    const formattedUser = formatUser(user);
+
+    res.json(formattedUser);
   } catch (err) {
     next(err);
   }
@@ -82,8 +85,10 @@ const patchBio = async (
     const userId = req.user.id;
     const bio = req.body.bio;
 
-    const updatedUser = await userQueries.updateBio(userId, bio);
-    res.json(updatedUser);
+    const user = await userQueries.updateBio(userId, bio);
+    const formattedUser = formatUser(user);
+
+    res.json(formattedUser);
   } catch (err) {
     next(err);
   }
@@ -108,10 +113,108 @@ const patchAvatar = async (
 
     const url = await uploadAvatar(userId, req.file);
     const user = await userQueries.updateAvatar(userId, url);
-    res.json(user);
+    const formattedUser = formatUser(user);
+
+    res.json(formattedUser);
   } catch (err) {
     next(err);
   }
 };
 
-export { getAllUsers, getUser, getCurrentUser, patchBio, patchAvatar };
+const getFollowing = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const requesterId = req.user.id;
+    const { userId } = req.params;
+    const following = await userQueries.getFollowing(requesterId, userId);
+    const formattedFollowing = following.map((follow) => formatUser(follow));
+    res.json({
+      data: formattedFollowing,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getFollowers = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const requesterId = req.user.id;
+    const { userId } = req.params;
+    const followers = await userQueries.getFollowers(requesterId, userId);
+    const formattedFollowers = followers.map((follow) => formatUser(follow));
+    res.json({
+      data: formattedFollowers,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const followUser = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const requesterId = req.user.id;
+    const { userId: followingId } = req.params;
+    const user = await userQueries.followUser(requesterId, followingId);
+    const formattedUser = formatUser(user);
+
+    res.json(formattedUser);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const unfollowUser = async (
+  req: Request<{ userId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const requesterId = req.user.id;
+    const { userId: followingId } = req.params;
+    const user = await userQueries.unfollowUser(requesterId, followingId);
+    const formattedUser = formatUser(user);
+
+    res.json(formattedUser);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {
+  getAllUsers,
+  getUser,
+  getCurrentUser,
+  patchBio,
+  patchAvatar,
+  getFollowing,
+  getFollowers,
+  followUser,
+  unfollowUser,
+};

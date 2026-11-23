@@ -6,6 +6,9 @@ import { Scrollable } from "@/shared/components/Scrollable.js";
 type UserProfileProps = {
   user: User | null;
   isLoadingUser: boolean;
+  handleFollowUser: (userId: string) => Promise<void>;
+  handleUnfollowUser: (userId: string) => Promise<void>;
+  isLoadingFollow: boolean;
   posts: Post[];
   isLoadingPosts: boolean;
   isLoadingNextPage: boolean;
@@ -18,6 +21,9 @@ const UserProfileView = ({
   // User Info
   user,
   isLoadingUser,
+  handleFollowUser,
+  handleUnfollowUser,
+  isLoadingFollow,
   // User Posts
   posts,
   hasNextPage,
@@ -37,7 +43,13 @@ const UserProfileView = ({
       onReachBottom={loadMore}
     >
       {/* User  */}
-      <UserInfo user={user} isLoadingUser={isLoadingUser} />
+      <UserInfo
+        user={user}
+        isLoadingUser={isLoadingUser}
+        handleFollowUser={handleFollowUser}
+        handleUnfollowUser={handleUnfollowUser}
+        isLoadingFollow={isLoadingFollow}
+      />
       {/* Posts */}
       <UserPosts
         posts={posts}

@@ -50,4 +50,36 @@ const patchUserAvatar = async (fileFormData: FormData) => {
   return data;
 };
 
-export { fetchCurrent, fetchUser, fetchUsers, patchUserBio, patchUserAvatar };
+const postFollowing = async (
+  userId: string,
+  signal?: AbortSignal,
+): Promise<User | null> => {
+  const data = await request(`api/users/${userId}/following`, {
+    method: "POST",
+    signal,
+  });
+
+  return data;
+};
+
+const deleteFollowing = async (
+  userId: string,
+  signal?: AbortSignal,
+): Promise<User | null> => {
+  const data = await request(`api/users/${userId}/following`, {
+    method: "DELETE",
+    signal,
+  });
+
+  return data;
+};
+
+export {
+  fetchCurrent,
+  fetchUser,
+  fetchUsers,
+  patchUserBio,
+  patchUserAvatar,
+  postFollowing,
+  deleteFollowing,
+};

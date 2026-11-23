@@ -4,6 +4,21 @@ const userSelect = (requesterId: string) => {
     username: true,
     bio: true,
     avatar: true,
+    _count: {
+      select: {
+        followers: true,
+        following: true,
+        posts: true,
+      },
+    },
+    followers: {
+      select: {
+        id: true,
+      },
+      where: {
+        id: requesterId,
+      },
+    },
   };
 };
 

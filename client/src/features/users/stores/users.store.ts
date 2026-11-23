@@ -5,6 +5,8 @@ import {
   fetchUser,
   patchUserBio,
   patchUserAvatar,
+  postFollowing,
+  deleteFollowing,
 } from "@/features/users/api/user.api.js";
 
 type UserState = {
@@ -12,9 +14,12 @@ type UserState = {
   selectedUser: User | null;
   isLoadingUsers: boolean;
   isLoadingUser: boolean;
+  isLoadingFollow: boolean;
 
   getUsers: () => Promise<void>;
   getUser: (userId: string) => Promise<void>;
+  followUser: (userId: string) => Promise<void>;
+  unfollowUser: (userId: string) => Promise<void>;
 
   isEditingBio: boolean;
   editBio: (bio: string) => Promise<User>;
@@ -75,7 +80,6 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   isUploadingAvatar: false,
-
   uploadAvatar: async (fileFormData) => {
     set({ isUploadingAvatar: true });
 
@@ -89,6 +93,49 @@ const useUserStore = create<UserState>((set) => ({
       return updatedUser;
     } finally {
       set({ isUploadingAvatar: false });
+    }
+  },
+
+  isLoadingFollow: false,
+  followUser: async (userId) => {
+    set({ isLoadingFollow: true });
+    try {
+      const updatedUser = await postFollowing(userId);
+
+      if (!updatedUser) return;
+
+      set((state) => ({
+        users: state.users.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user,
+        ),
+        selectedUser:
+          state.selectedUser?.id === updatedUser.id
+            ? updatedUser
+            : state.selectedUser,
+      }));
+    } finally {
+      set({ isLoadingFollow: false });
+    }
+  },
+
+  unfollowUser: async (userId) => {
+    set({ isLoadingFollow: true });
+    try {
+      const updatedUser = await deleteFollowing(userId);
+
+      if (!updatedUser) return;
+
+      set((state) => ({
+        users: state.users.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user,
+        ),
+        selectedUser:
+          state.selectedUser?.id === updatedUser.id
+            ? updatedUser
+            : state.selectedUser,
+      }));
+    } finally {
+      set({ isLoadingFollow: false });
     }
   },
 }));

@@ -6,10 +6,14 @@ import {
 } from "@/shared/components/ui/avatar.js";
 import { Button } from "@/shared/components/ui/button.js";
 import { Card } from "@/shared/components/ui/card.js";
+import { FollowButton } from "@/features/users/components/FollowButton.js";
 
 type UserInfoProps = {
   user: User;
   isLoadingUser: boolean;
+  handleFollowUser: (userId: string) => Promise<void>;
+  handleUnfollowUser: (userId: string) => Promise<void>;
+  isLoadingFollow: boolean;
 };
 
 type UserStatBlockProps = {
@@ -26,7 +30,13 @@ const UserStatBlock = ({ count, label }: UserStatBlockProps) => {
   );
 };
 
-const UserInfo = ({ user, isLoadingUser }: UserInfoProps) => {
+const UserInfo = ({
+  user,
+  isLoadingUser,
+  handleFollowUser,
+  handleUnfollowUser,
+  isLoadingFollow,
+}: UserInfoProps) => {
   return (
     <header className="flex flex-col gap-4">
       {/* Username */}
@@ -50,12 +60,13 @@ const UserInfo = ({ user, isLoadingUser }: UserInfoProps) => {
 
         {/* Mobile actions */}
         <Card className="col-span-3 flex flex-col items-center justify-center gap-2 rounded-lg border-0 bg-transparent p-0 shadow-none md:hidden">
-          <Button
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-            disabled
-          >
-            Follow
-          </Button>
+          <FollowButton
+            userId={user.id}
+            isFollowing={user.isFollowing}
+            handleFollowUser={() => handleFollowUser(user.id)}
+            handleUnfollowUser={() => handleUnfollowUser(user.id)}
+            isLoadingFollow={isLoadingFollow}
+          />
           <Button
             variant="outline"
             className="w-full border-0 bg-secondary text-foreground hover:bg-secondary/80"
@@ -67,25 +78,26 @@ const UserInfo = ({ user, isLoadingUser }: UserInfoProps) => {
 
         {/* Stats */}
         <div className="col-span-2 flex min-h-16 items-center justify-center px-1 py-3 md:row-span-2">
-          <UserStatBlock count={0} label="Followers" />
+          <UserStatBlock count={user.followersCount} label="Followers" />
         </div>
 
         <div className="col-span-2 flex min-h-16 items-center justify-center px-1 py-3 md:row-span-2">
-          <UserStatBlock count={0} label="Following" />
+          <UserStatBlock count={user.followingCount} label="Following" />
         </div>
 
         <div className="col-span-2 flex min-h-16 items-center justify-center px-1 py-3 md:row-span-2">
-          <UserStatBlock count={0} label="Posts" />
+          <UserStatBlock count={user.postCount} label="Posts" />
         </div>
 
         {/* Desktop actions */}
         <div className="col-span-3 hidden items-center justify-center p-2 md:flex">
-          <Button
-            className="w-full max-w-40 bg-primary text-primary-foreground hover:bg-primary/90"
-            disabled
-          >
-            Follow
-          </Button>
+          <FollowButton
+            userId={user.id}
+            isFollowing={user.isFollowing}
+            handleFollowUser={() => handleFollowUser(user.id)}
+            handleUnfollowUser={() => handleUnfollowUser(user.id)}
+            isLoadingFollow={isLoadingFollow}
+          />
         </div>
 
         <div className="col-span-3 hidden items-center justify-center p-2 md:flex">

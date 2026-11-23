@@ -10,7 +10,11 @@ const useUser = (userId: string) => {
     getUser(userId);
   }, [userId, getUser]);
 
-  return { user, isLoading };
+  return {
+    user,
+    isLoading,
+    refetch: () => getUser(userId),
+  };
 };
 
 export { useUser };
