@@ -32,4 +32,28 @@ const createPost = async (postData: CreatePostData) => {
   return data;
 };
 
-export { fetchPosts, createPost };
+const deletePost = async (postId: string, signal?: AbortSignal) => {
+  const data = await request(`api/posts/${postId}`, {
+    method: "DELETE",
+    signal,
+  });
+  return data;
+};
+
+const createPostLike = async (postId: string, signal?: AbortSignal) => {
+  const data = await request(`api/posts/${postId}/likes`, {
+    method: "POST",
+    signal,
+  });
+  return data;
+};
+
+const deletePostLike = async (postId: string, signal?: AbortSignal) => {
+  const data = await request(`api/posts/${postId}/likes`, {
+    method: "DELETE",
+    signal,
+  });
+  return data;
+};
+
+export { fetchPosts, createPost, deletePost, createPostLike, deletePostLike };

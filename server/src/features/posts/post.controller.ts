@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import * as postQueries from "#features/posts/post.queries.js";
+import { formatPostData } from "#features/posts/post.service.js";
 
 const getPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -19,6 +20,9 @@ const getPosts = async (req: Request, res: Response, next: NextFunction) => {
       cursor,
       Number(limit),
     );
+    data.posts = data.posts.map((post) => {
+      return formatPostData(post);
+    });
     res.json(data);
   } catch (err) {
     console.error(err);
@@ -36,16 +40,63 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const requesterId = requester.id;
-
     const content = req.body.content;
-
     const post = await postQueries.createPost(requesterId, content);
 
-    res.json(post);
+    // adds url to post
+    const formattedPost = formatPostData(post);
+    res.json(formattedPost);
   } catch (err) {
     console.error(err);
     throw err;
   }
 };
 
-export { getPosts, createPost };
+const likePost = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { postId } = req.params;
+    const post = await postQueries.likePost(userId, postId);
+    const formattedPost = formatPostData(post);
+    res.json(formattedPost);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const unlikePost = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { postId } = req.params;
+    const post = await postQueries.unlikePost(userId, postId);
+    const formattedPost = formatPostData(post);
+    res.json(formattedPost);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const deletePost = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { postId } = req.params;
+
+    // verify if authorized to delete post
+    const post = await postQueries.getPostById(userId, postId);
+    if (!post) throw new Error("Unable to delete post");
+    if (post.authorId != userId) {
+      console.error("Unable to delete post");
+    }
+
+    // Delete media on supabase (if present)
+
+    // Delete post on DB
+    const deletedPost = await postQueries.deletePost(userId, postId);
+    const formattedPost = formatPostData(deletedPost);
+    res.json(formattedPost);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export { getPosts, createPost, likePost, unlikePost, deletePost };

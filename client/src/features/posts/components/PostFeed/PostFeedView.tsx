@@ -17,7 +17,11 @@ const PostFeedView = ({
   posts,
   isLoadingInit,
   isLoadingNextPage,
+  isDeletingPost,
+  isLoadingLike,
   hasNextPage,
+  deletePost,
+  toggleLike,
   refetch,
   loadMore,
 }: PostFeedProps) => {
@@ -61,6 +65,13 @@ const PostFeedView = ({
           posts={posts}
           isLoadingInit={isLoadingInit}
           isLoadingNextPage={isLoadingNextPage}
+          isDeletingPost={isDeletingPost}
+          isLoadingLike={isLoadingLike}
+          hasNextPage={hasNextPage}
+          deletePost={deletePost}
+          toggleLike={toggleLike}
+          refetch={refetch}
+          loadMore={loadMore}
         />
       </section>
     </Scrollable>

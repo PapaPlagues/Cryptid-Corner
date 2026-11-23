@@ -8,11 +8,29 @@ type PostsProps = {
   isLoadingNextPage: boolean;
 };
 
-const Posts = ({ posts, isLoadingInit, isLoadingNextPage }: PostsProps) => {
+const Posts = ({
+  posts,
+  isLoadingInit,
+  isLoadingNextPage,
+  isDeletingPost,
+  isLoadingLike,
+  hasNextPage,
+  deletePost,
+  toggleLike,
+  refetch,
+  loadMore,
+}: PostsProps) => {
   return (
     <div className="flex flex-col gap-4">
       {posts.map((post) => (
-        <Post post={post} key={post.id} isLoadingInit={isLoadingInit} />
+        <Post
+          post={post}
+          key={post.id}
+          isLoadingInit={isLoadingInit}
+          toggleLike={toggleLike}
+          isLoadingLike={isLoadingLike}
+          deletePost={deletePost}
+        />
       ))}
       {isLoadingNextPage &&
         Array.from({ length: 3 }, (_, index) => (

@@ -2,6 +2,9 @@ import { create } from "zustand";
 import {
   fetchPosts,
   createPost as createPostRequest,
+  deletePost as deletePostRequest,
+  createPostLike as createPostLikeRequest,
+  deletePostLike as deletePostLikeRequest,
 } from "@/features/posts/api/posts.api.js";
 import type { Post } from "@/shared/types/post.types.js";
 import type { CreatePostData } from "../api/posts.api";
@@ -21,10 +24,15 @@ type PostState = {
   isLoadingInit: boolean;
   isLoadingNextPage: boolean;
   isCreatingPost: boolean;
+  isDeletingPost: boolean;
+  isLoadingLike: boolean;
 
   getPosts: (limit?: number, userId?: string | null) => Promise<void>;
   getNextPage: (limit?: number, userId?: string | null) => Promise<void>;
   createPost: (postData: CreatePostData) => Promise<void>;
+  deletePost: (postId: string) => Promise<void>;
+  likePost: (postId: string) => Promise<void>;
+  unlikePost: (postId: string) => Promise<void>;
 };
 
 const usePostStore = create<PostState>((set, get) => ({
@@ -34,6 +42,8 @@ const usePostStore = create<PostState>((set, get) => ({
   isLoadingInit: false,
   isLoadingNextPage: false,
   isCreatingPost: false,
+  isDeletingPost: false,
+  isLoadingLike: false,
 
   getPosts: async (limit = 20, userId = null) => {
     set({ isLoadingInit: true });
@@ -86,6 +96,58 @@ const usePostStore = create<PostState>((set, get) => ({
       console.error(err);
     } finally {
       set({ isCreatingPost: false });
+    }
+  },
+
+  deletePost: async (postId) => {
+    set({ isDeletingPost: true });
+
+    try {
+      await deletePostRequest(postId);
+
+      set((state) => ({
+        posts: state.posts.filter((post) => post.id !== postId),
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      set({ isDeletingPost: false });
+    }
+  },
+
+  likePost: async (postId) => {
+    set({ isLoadingLike: true });
+
+    try {
+      const updatedPost = await createPostLikeRequest(postId);
+
+      set((state) => ({
+        posts: state.posts.map((post) =>
+          post.id === postId ? updatedPost : post,
+        ),
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      set({ isLoadingLike: false });
+    }
+  },
+
+  unlikePost: async (postId) => {
+    set({ isLoadingLike: true });
+
+    try {
+      const updatedPost = await deletePostLikeRequest(postId);
+
+      set((state) => ({
+        posts: state.posts.map((post) =>
+          post.id === postId ? updatedPost : post,
+        ),
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      set({ isLoadingLiket: false });
     }
   },
 }));

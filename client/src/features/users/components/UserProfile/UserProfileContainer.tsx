@@ -16,7 +16,7 @@ const UserProfileContainer = ({ userId }: UserProfileContainerProps) => {
     hasNextPage,
     refetch,
     loadMore,
-  } = usePosts(3, userId);
+  } = usePosts(10, userId);
 
   return (
     <UserProfileView

@@ -2,6 +2,7 @@ import type { User } from "@/shared/types/user.types.js";
 import { UserInfo } from "@/features/users/components/UserInfo.js";
 import { UserPosts } from "@/features/users/components/UserPosts.js";
 import type { Post } from "@/shared/types/post.types.js";
+import { Scrollable } from "@/shared/components/Scrollable.js";
 type UserProfileProps = {
   user: User | null;
   isLoadingUser: boolean;
@@ -29,7 +30,12 @@ const UserProfileView = ({
   if (isLoadingUser) return <p>Loading profile...</p>;
 
   return (
-    <div>
+    <Scrollable
+      className="flex flex-1 flex-col"
+      hasMore={hasNextPage}
+      isLoadingMore={isLoadingNextPage}
+      onReachBottom={loadMore}
+    >
       {/* User  */}
       <UserInfo user={user} isLoadingUser={isLoadingUser} />
       {/* Posts */}
@@ -41,7 +47,7 @@ const UserProfileView = ({
         refetch={refetch}
         loadMore={loadMore}
       />
-    </div>
+    </Scrollable>
   );
 };
 

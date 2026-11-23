@@ -9,8 +9,8 @@ const UserPage = () => {
   }
 
   return (
-    <div className="relative grid min-w-0 w-full flex-1 grid-cols-1 xl:grid-cols-[minmax(0,40rem)_16rem] xl:justify-center xl:gap-6">
-      <div className="main-container flex min-w-0 flex-col">
+    <div className="relative grid min-h-0 min-w-0 w-full flex-1 grid-cols-1 xl:grid-cols-[minmax(0,40rem)_16rem] xl:justify-center xl:gap-6">
+      <div className="main-container flex min-h-0 min-w-0 flex-col">
         <UserProfile userId={userId} />
       </div>
     </div>

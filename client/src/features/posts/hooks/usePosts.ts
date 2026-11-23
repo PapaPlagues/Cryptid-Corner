@@ -5,11 +5,26 @@ const usePosts = (limit = 20, userId: string | null = null) => {
   const posts = usePostStore((state) => state.posts);
   const getPosts = usePostStore((state) => state.getPosts);
   const getNextPage = usePostStore((state) => state.getNextPage);
+  const deletePost = usePostStore((state) => state.deletePost);
+
+  // Likes
+  const likePost = usePostStore((state) => state.likePost);
+  const unlikePost = usePostStore((state) => state.unlikePost);
 
   const isLoadingInit = usePostStore((state) => state.isLoadingInit);
   const isLoadingNextPage = usePostStore((state) => state.isLoadingNextPage);
+  const isDeletingPost = usePostStore((state) => state.isDeletingPost);
+  const isLoadingLike = usePostStore((state) => state.isLoadingLike);
 
   const hasNextPage = usePostStore((state) => state.hasNextPage);
+
+  const toggleLike = (postId, hasLiked) => {
+    if (hasLiked) {
+      unlikePost(postId);
+    } else {
+      likePost(postId);
+    }
+  };
 
   useEffect(() => {
     getPosts(limit, userId);
@@ -19,7 +34,11 @@ const usePosts = (limit = 20, userId: string | null = null) => {
     posts,
     isLoadingInit,
     isLoadingNextPage,
+    isDeletingPost,
+    isLoadingLike,
     hasNextPage,
+    deletePost,
+    toggleLike,
     refetch: () => getPosts(limit, userId),
     loadMore: () => getNextPage(limit, userId),
   };

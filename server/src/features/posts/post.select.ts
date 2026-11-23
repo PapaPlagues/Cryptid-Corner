@@ -1,4 +1,5 @@
 import { USER_SELECT_BASIC } from "#features/users/user.select.js";
+import { likesSelect } from "#features/posts/likes.select.js";
 
 const postSelect = (requesterId: string) => {
   return {
@@ -10,6 +11,13 @@ const postSelect = (requesterId: string) => {
     authorId: true,
     author: {
       select: USER_SELECT_BASIC,
+    },
+    ...likesSelect(requesterId),
+    _count: {
+      select: {
+        likers: true,
+        comments: true,
+      },
     },
   };
 };

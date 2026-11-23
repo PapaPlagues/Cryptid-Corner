@@ -5,7 +5,11 @@ const PostFeedContainer = () => {
     posts,
     isLoadingInit,
     isLoadingNextPage,
+    isDeletingPost,
+    isLoadingLike,
     hasNextPage,
+    deletePost,
+    toggleLike,
     refetch,
     loadMore,
   } = usePosts(10);
@@ -15,7 +19,11 @@ const PostFeedContainer = () => {
       posts={posts}
       isLoadingInit={isLoadingInit}
       isLoadingNextPage={isLoadingNextPage}
+      isDeletingPost={isDeletingPost}
+      isLoadingLike={isLoadingLike}
       hasNextPage={hasNextPage}
+      deletePost={deletePost}
+      toggleLike={toggleLike}
       refetch={refetch}
       loadMore={loadMore}
     />

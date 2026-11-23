@@ -1,4 +1,5 @@
 import type { Post as PostType } from "@/shared/types/post.types.js";
+import { Heart } from "lucide-react";
 import { Button } from "@/shared/components/ui/button.js";
 import {
   Avatar,
@@ -11,15 +12,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
-import { Heart, MessageCircle, MoreHorizontal } from "lucide-react";
+import { MessageCircle, MoreHorizontal } from "lucide-react";
 import { PostSkeleton } from "@/features/posts/components/PostSkeleton.js";
+import { IncrementButton } from "@/features/posts/components/IncrememntButton.js";
 
 type PostProps = {
   post: PostType;
   isLoadingInit: boolean;
 };
 
-const Post = ({ post, isLoadingInit }: PostProps) => {
+const Post = ({
+  post,
+  isLoadingInit,
+  toggleLike,
+  isLoadingLike,
+  deletePost,
+}: PostProps) => {
   if (isLoadingInit) {
     return <PostSkeleton />;
   }
@@ -77,10 +85,13 @@ const Post = ({ post, isLoadingInit }: PostProps) => {
 
       {/* Footer */}
       <footer className="flex items-center gap-2 border-t px-4 py-4">
-        <Button variant="ghost" size="sm" className="gap-2">
-          <Heart className="h-4 w-4" />
-          <span>0</span>
-        </Button>
+        <IncrementButton
+          count={post.likeCount}
+          onClick={() => toggleLike(post.id, post.hasLiked)}
+          icon={Heart}
+          isActive={post.hasLiked}
+          activeClassName="text-red-500"
+        />
 
         <Button variant="ghost" size="sm" className="gap-2">
           <MessageCircle className="h-4 w-4" />
