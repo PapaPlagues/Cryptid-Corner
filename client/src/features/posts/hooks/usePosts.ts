@@ -6,6 +6,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
   const getPosts = usePostStore((state) => state.getPosts);
   const getNextPage = usePostStore((state) => state.getNextPage);
   const deletePost = usePostStore((state) => state.deletePost);
+  const setFeedType = usePostStore((state) => state.setFeedType);
 
   // Likes
   const likePost = usePostStore((state) => state.likePost);
@@ -15,6 +16,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
   const isLoadingNextPage = usePostStore((state) => state.isLoadingNextPage);
   const isDeletingPost = usePostStore((state) => state.isDeletingPost);
   const isLoadingLike = usePostStore((state) => state.isLoadingLike);
+  const feedType = usePostStore((state) => state.feedType);
 
   const hasNextPage = usePostStore((state) => state.hasNextPage);
 
@@ -36,8 +38,10 @@ const usePosts = (limit = 20, userId: string | null = null) => {
     isLoadingNextPage,
     isDeletingPost,
     isLoadingLike,
+    feedType,
     hasNextPage,
     deletePost,
+    setFeedType,
     toggleLike,
     refetch: () => getPosts(limit, userId),
     loadMore: () => getNextPage(limit, userId),

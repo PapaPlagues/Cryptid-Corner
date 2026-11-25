@@ -6,6 +6,7 @@ import { authRouter } from "#features/auth/auth.router.js";
 import { userRouter } from "#features/users/user.router.js";
 import { currentRouter } from "#features/users/current.router.js";
 import { postRouter } from "#features/posts/post.router.js";
+import { commentRouter } from "#features/posts/comment.router.js";
 
 const app = express();
 app.use(
@@ -25,5 +26,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/current", currentRouter);
 app.use("/api/users", userRouter);
 app.use("/api/posts", postRouter);
+app.use("/api/comments", commentRouter);
 
 export default app;

@@ -23,6 +23,8 @@ const UserProfileContainer = ({ userId }: UserProfileContainerProps) => {
     isLoadingPosts,
     isLoadingNextPage,
     hasNextPage,
+    isLoadingLike,
+    toggleLike,
     refetch,
     loadMore,
   } = usePosts(10, userId);
@@ -45,11 +47,13 @@ const UserProfileContainer = ({ userId }: UserProfileContainerProps) => {
       handleFollowUser={handleFollowUser}
       handleUnfollowUser={handleUnfollowUser}
       isLoadingFollow={isLoadingFollow}
+      isLoadingLike={isLoadingLike}
       // User Posts
       posts={posts}
       isLoadingPosts={isLoadingPosts}
       isLoadingNextPage={isLoadingNextPage}
       hasNextPage={hasNextPage}
+      toggleLike={toggleLike}
       refetch={refetch}
       loadMore={loadMore}
     />

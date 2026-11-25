@@ -29,6 +29,8 @@ const UserProfileView = ({
   hasNextPage,
   isLoadingPosts,
   isLoadingNextPage,
+  isLoadingLike,
+  toggleLike,
   refetch,
   loadMore,
 }: UserProfileProps) => {
@@ -58,6 +60,8 @@ const UserProfileView = ({
         hasNextPage={hasNextPage}
         refetch={refetch}
         loadMore={loadMore}
+        isLoadingLike={isLoadingLike}
+        toggleLike={toggleLike}
       />
     </Scrollable>
   );

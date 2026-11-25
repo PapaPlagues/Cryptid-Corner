@@ -5,6 +5,8 @@ const UserPosts = ({
   hasNextPage,
   isLoadingPosts,
   isLoadingNextPage,
+  isLoadingLike,
+  toggleLike,
   refetch,
   loadMore,
 }) => {
@@ -28,6 +30,8 @@ const UserPosts = ({
           hasNextPage={hasNextPage}
           refetch={refetch}
           loadMore={loadMore}
+          isLoadingLike={isLoadingLike}
+          toggleLike={toggleLike}
         />
       </div>
     </section>

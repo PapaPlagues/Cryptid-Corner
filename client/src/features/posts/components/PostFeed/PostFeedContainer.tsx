@@ -7,8 +7,10 @@ const PostFeedContainer = () => {
     isLoadingNextPage,
     isDeletingPost,
     isLoadingLike,
+    feedType,
     hasNextPage,
     deletePost,
+    setFeedType,
     toggleLike,
     refetch,
     loadMore,
@@ -26,6 +28,8 @@ const PostFeedContainer = () => {
       toggleLike={toggleLike}
       refetch={refetch}
       loadMore={loadMore}
+      feedType={feedType}
+      setFeedType={setFeedType}
     />
   );
 };

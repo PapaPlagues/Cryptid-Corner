@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import * as postQueries from "#features/posts/post.queries.js";
+import * as userQueries from "#features/users/user.queries.js";
 import { formatPostData } from "#features/posts/post.service.js";
 
 const getPosts = async (req: Request, res: Response, next: NextFunction) => {
@@ -20,10 +21,40 @@ const getPosts = async (req: Request, res: Response, next: NextFunction) => {
       cursor,
       Number(limit),
     );
-    data.posts = data.posts.map((post) => {
-      return formatPostData(post);
-    });
-    res.json(data);
+    const posts = data.posts.map((post) => formatPostData(post));
+    res.json({ ...data, posts });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+const getFollowingPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const requester = req.user;
+
+    if (!requester) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+    const requesterId = requester.id;
+    const following = await userQueries.getFollowing(requesterId, requesterId);
+    const followingIds = following.map((user) => user.id);
+
+    const cursor = req.query.cursor ? req.query.cursor : null;
+    const limit = req.query.limit ? req.query.limit : 20;
+    const data = await postQueries.getPosts(
+      requesterId,
+      [requesterId, ...followingIds],
+      cursor,
+      Number(limit),
+    );
+    const posts = data.posts.map((post) => formatPostData(post));
+    res.json({ ...data, posts });
   } catch (err) {
     console.error(err);
     throw err;
@@ -99,4 +130,11 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-export { getPosts, createPost, likePost, unlikePost, deletePost };
+export {
+  getPosts,
+  getFollowingPosts,
+  createPost,
+  likePost,
+  unlikePost,
+  deletePost,
+};

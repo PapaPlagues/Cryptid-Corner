@@ -5,6 +5,7 @@ import {
   deletePost as deletePostRequest,
   createPostLike as createPostLikeRequest,
   deletePostLike as deletePostLikeRequest,
+  fetchPostsFeed,
 } from "@/features/posts/api/posts.api.js";
 import type { Post } from "@/shared/types/post.types.js";
 import type { CreatePostData } from "../api/posts.api";
@@ -17,6 +18,8 @@ type PostsResponse = {
   };
 };
 
+type FeedType = "all" | "following";
+
 type PostState = {
   posts: Post[];
   hasNextPage: boolean;
@@ -26,6 +29,7 @@ type PostState = {
   isCreatingPost: boolean;
   isDeletingPost: boolean;
   isLoadingLike: boolean;
+  feedType: FeedType;
 
   getPosts: (limit?: number, userId?: string | null) => Promise<void>;
   getNextPage: (limit?: number, userId?: string | null) => Promise<void>;
@@ -33,6 +37,7 @@ type PostState = {
   deletePost: (postId: string) => Promise<void>;
   likePost: (postId: string) => Promise<void>;
   unlikePost: (postId: string) => Promise<void>;
+  setFeedType: (feedType: FeedType) => void;
 };
 
 const usePostStore = create<PostState>((set, get) => ({
@@ -44,12 +49,27 @@ const usePostStore = create<PostState>((set, get) => ({
   isCreatingPost: false,
   isDeletingPost: false,
   isLoadingLike: false,
+  feedType: "all",
+
+  fetchData: (signal, cursor, limit, userId = null) => {
+    if (userId) {
+      return fetchPosts(signal, cursor, limit, userId);
+    }
+    const { feedType } = get();
+
+    if (feedType === "following") {
+      return fetchPostsFeed(signal, cursor, limit);
+    }
+
+    return fetchPosts(signal, cursor, limit);
+  },
 
   getPosts: async (limit = 20, userId = null) => {
     set({ isLoadingInit: true });
+    const { fetchData } = get();
 
     try {
-      const data: PostsResponse = await fetchPosts(null, limit, userId);
+      const data: PostsResponse = await fetchData(null, null, limit, userId);
       set({
         posts: data.posts,
         hasNextPage: data.meta.hasNextPage,
@@ -66,9 +86,14 @@ const usePostStore = create<PostState>((set, get) => ({
     const { endCursor, hasNextPage, isLoadingNextPage } = get();
     if (!hasNextPage || !endCursor || isLoadingNextPage) return;
     set({ isLoadingNextPage: true });
-
+    const { fetchData } = get();
     try {
-      const data: PostsResponse = await fetchPosts(endCursor, limit, userId);
+      const data: PostsResponse = await fetchData(
+        null,
+        endCursor,
+        limit,
+        userId,
+      );
 
       set((state) => ({
         posts: [...state.posts, ...data.posts],
@@ -147,8 +172,12 @@ const usePostStore = create<PostState>((set, get) => ({
     } catch (err) {
       console.error(err);
     } finally {
-      set({ isLoadingLiket: false });
+      set({ isLoadingLike: false });
     }
+  },
+
+  setFeedType: (feedType) => {
+    set({ feedType });
   },
 }));
 

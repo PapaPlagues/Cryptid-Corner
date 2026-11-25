@@ -6,6 +6,7 @@ export type CreatePostData = {
 };
 
 const fetchPosts = async (
+  signal?: AbortSignal,
   cursor: string | null = null,
   limit = 20,
   userId: string | null = null,
@@ -19,6 +20,22 @@ const fetchPosts = async (
 
   const data = await request(`api/posts?${params.toString()}`, {
     method: "GET",
+  });
+  return data;
+};
+
+const fetchPostsFeed = async (
+  signal?: AbortSignal,
+  cursor: string | null = null,
+  limit = 20,
+) => {
+  const params = new URLSearchParams();
+  params.append("limit", String(limit));
+
+  if (cursor) params.append("cursor", cursor);
+  const data = await request(`api/posts/feed?${params.toString()}`, {
+    method: "GET",
+    signal,
   });
   return data;
 };
@@ -56,4 +73,11 @@ const deletePostLike = async (postId: string, signal?: AbortSignal) => {
   return data;
 };
 
-export { fetchPosts, createPost, deletePost, createPostLike, deletePostLike };
+export {
+  fetchPosts,
+  fetchPostsFeed,
+  createPost,
+  deletePost,
+  createPostLike,
+  deletePostLike,
+};

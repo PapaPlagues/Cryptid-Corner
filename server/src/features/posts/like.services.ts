@@ -1,10 +1,15 @@
-const setLikes = (content) => {
+type LikeContent = {
+  likers: { id: string }[];
+  _count: { likers: number };
+};
+
+const setLikes = <T extends LikeContent>(content: T) => {
   const { likers, ...formattedContent } = content;
-  formattedContent.hasLiked = likers ? likers.length > 0 : false;
-  formattedContent.likeCount = content._count.likers
-    ? content._count.likers
-    : 0;
-  return formattedContent;
+  return {
+    ...formattedContent,
+    hasLiked: likers.length > 0,
+    likeCount: content._count.likers ? content._count.likers : 0,
+  };
 };
 
 export { setLikes };

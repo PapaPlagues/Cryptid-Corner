@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as postController from "#features/posts/post.controller.js";
+import * as commentController from "#features/posts/comment.controller.js";
 import { authenticateToken } from "#shared/middleware/handleVerifyToken.js";
 
 const postRouter = Router();
@@ -7,8 +8,7 @@ const postRouter = Router();
 postRouter.get("/", authenticateToken, postController.getPosts);
 postRouter.post("/", authenticateToken, postController.createPost);
 postRouter.delete("/:postId", authenticateToken, postController.deletePost);
-
-// get feed
+postRouter.get("/feed", authenticateToken, postController.getFollowingPosts);
 
 // Likes
 postRouter.post("/:postId/likes", authenticateToken, postController.likePost);
@@ -18,8 +18,13 @@ postRouter.delete(
   postController.unlikePost,
 );
 
-// get comments
+// Comments
+postRouter.get(
+  "/:postId/comments",
+  authenticateToken,
+  commentController.getComments,
+);
 
-// create comment
+postRouter.post("/:postId/comments", authenticateToken, commentController.createComment);
 
 export { postRouter };
