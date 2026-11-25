@@ -5,6 +5,11 @@ import {
   deletePost as deletePostRequest,
   createPostLike as createPostLikeRequest,
   deletePostLike as deletePostLikeRequest,
+  fetchComments,
+  createComment,
+  createCommentLike,
+  deleteCommentLike,
+  deleteComment,
   fetchPostsFeed,
 } from "@/features/posts/api/posts.api.js";
 import type { Post } from "@/shared/types/post.types.js";

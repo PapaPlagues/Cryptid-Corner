@@ -1,5 +1,6 @@
 const SERVER_BASE_URL = import.meta.env.VITE_API_URI;
 import { request } from "@/shared/services/request.js";
+import { Signal } from "lucide-react";
 
 export type CreatePostData = {
   content: string;
@@ -57,6 +58,7 @@ const deletePost = async (postId: string, signal?: AbortSignal) => {
   return data;
 };
 
+// Likes
 const createPostLike = async (postId: string, signal?: AbortSignal) => {
   const data = await request(`api/posts/${postId}/likes`, {
     method: "POST",
@@ -73,6 +75,55 @@ const deletePostLike = async (postId: string, signal?: AbortSignal) => {
   return data;
 };
 
+// Comments
+const fetchComments = async (postId: string, signal?: AbortSignal) => {
+  const data = await request(`api/posts/${postId}/comments`, {
+    method: "GET",
+    signal,
+  });
+  return data;
+};
+
+const createComment = async (
+  postId: string,
+  content: string,
+  signal?: AbortSignal,
+) => {
+  const data = await request(`posts/${postId}/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ content }),
+    signal,
+  });
+  return data;
+};
+
+const createCommentLike = async (commentId: string, signal?: AbortSignal) => {
+  const data = await request(`comments/${commentId}/likes`, {
+    method: "POST",
+    signal,
+  });
+  return data;
+};
+
+const deleteCommentLike = async (commentId: string, signal?: AbortSignal) => {
+  const data = await request(`comments/${commentId}/likes`, {
+    method: "DELETE",
+    signal,
+  });
+  return data;
+};
+
+const deleteComment = async (commentId: string, signal?: AbortSignal) => {
+  const data = await request(`comments/${commentId}`, {
+    method: "DELETE",
+    signal,
+  });
+  return data;
+};
+
 export {
   fetchPosts,
   fetchPostsFeed,
@@ -80,4 +131,9 @@ export {
   deletePost,
   createPostLike,
   deletePostLike,
+  fetchComments,
+  createComment,
+  createCommentLike,
+  deleteCommentLike,
+  deleteComment,
 };

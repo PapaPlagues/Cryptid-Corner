@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   id: string;
   username: string;
   bio: string | null;
@@ -8,5 +8,3 @@ type User = {
   postCount: number;
   isFollowing: boolean;
 };
-
-export type { User };
