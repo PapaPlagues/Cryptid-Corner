@@ -30,7 +30,7 @@ const CommentSection = ({ postId }: { postId: string }) => {
           currentUserId={userId}
           comments={comments}
           isLoadingComments={isLoadingComments}
-          deleteComments={deleteComment}
+          deleteComment={deleteComment}
           toggleLike={toggleLike}
         />
       </div>

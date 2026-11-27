@@ -2,6 +2,8 @@ import type { Request, Response, NextFunction } from "express";
 import * as postQueries from "#features/posts/post.queries.js";
 import * as userQueries from "#features/users/user.queries.js";
 import { formatPostData } from "#features/posts/post.service.js";
+import { AuthenticationError } from "#shared/errors/AuthenticationError.js";
+import { DatabaseError } from "#shared/errors/DatabaseError.js";
 
 const getPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -107,26 +109,36 @@ const unlikePost = async (req, res, next) => {
   }
 };
 
-const deletePost = async (req, res, next) => {
+const deletePost = async (
+  req: Request<{ postId: string }>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
-    const userId = req.user.id;
+    const requester = req.user;
+    if (!requester) {
+      res.status(401).json({ error: "Authentication required" });
+      return;
+    }
+
+    const userId = requester.id;
     const { postId } = req.params;
 
-    // verify if authorized to delete post
     const post = await postQueries.getPostById(userId, postId);
-    if (!post) throw new Error("Unable to delete post");
-    if (post.authorId != userId) {
-      console.error("Unable to delete post");
+    if (!post) throw new DatabaseError("Unable to delete post", 404);
+    if (post.authorId !== userId) {
+      throw new AuthenticationError("Unable to delete post", 404);
     }
 
     // Delete media on supabase (if present)
 
     // Delete post on DB
     const deletedPost = await postQueries.deletePost(userId, postId);
+    if (!deletedPost) throw new DatabaseError("Unable to delete post");
     const formattedPost = formatPostData(deletedPost);
     res.json(formattedPost);
   } catch (err) {
-    console.error(err);
+    next(err);
   }
 };
 

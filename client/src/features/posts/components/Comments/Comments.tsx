@@ -14,14 +14,23 @@ import {
 import { Button } from "@/shared/components/ui/button.js";
 import { MoreHorizontal, Heart, MessageCircle } from "lucide-react";
 import { IncrementButton } from "@/features/posts/components/IncrementButton.js";
+import type { Comment } from "@/shared/types/comment.types.js";
+
+type CommentsProps = {
+  currentUserId: string | undefined;
+  comments: Comment[];
+  isLoadingComments: boolean;
+  deleteComment: (commentId: string) => Promise<void>;
+  toggleLike: (commentId: string, hasLiked: boolean) => void;
+};
 
 const Comments = ({
   currentUserId,
   comments,
   isLoadingComments,
-  deleteComments,
+  deleteComment,
   toggleLike,
-}) => {
+}: CommentsProps) => {
   if (isLoadingComments) {
     return (
       <div>

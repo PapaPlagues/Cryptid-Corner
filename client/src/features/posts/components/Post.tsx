@@ -18,20 +18,25 @@ import { PostSkeleton } from "@/features/posts/components/PostSkeleton.js";
 import { IncrementButton } from "@/features/posts/components/IncrementButton.js";
 import { CommentSection } from "@/features/posts/components/Comments/CommentSection.js";
 import { useState } from "react";
+import { useAuthStore } from "@/features/auth/stores/auth.store.js";
 
 type PostProps = {
   post: PostType;
   isLoadingInit: boolean;
+  isLoadingLike: boolean;
+  toggleLike: (postId: string, hasLiked: boolean) => void;
+  deletePost: (postId: string) => Promise<void>;
 };
 
 const Post = ({
   post,
   isLoadingInit,
   toggleLike,
-  isLoadingLike,
   deletePost,
 }: PostProps) => {
   const [isShowingComments, setIsShowingComments] = useState(false);
+  const currentUserId = useAuthStore((state) => state.user?.id);
+  const isAuthor = currentUserId === post.authorId;
 
   if (isLoadingInit) {
     return <PostSkeleton />;
@@ -64,18 +69,25 @@ const Post = ({
             </div>
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
-                </Button>
-              }
-            />
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>Delete Post</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isAuthor && (
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+                  </Button>
+                }
+              />
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  className="text-destructive focus:text-destructive"
+                  onClick={() => deletePost(post.id)}
+                >
+                  Delete post
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </header>
 
         {/* Content */}
