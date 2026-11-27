@@ -29,7 +29,7 @@ const CreatePost = () => {
         </button>
 
         <div className="flex items-center gap-3">
-          <p>0/100</p>
+          <p>{content.length}/100</p>
 
           <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
             Post

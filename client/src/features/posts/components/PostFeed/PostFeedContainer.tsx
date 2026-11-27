@@ -12,7 +12,7 @@ const PostFeedContainer = () => {
     deletePost,
     setFeedType,
     toggleLike,
-    refetch,
+    refetchPosts,
     loadMore,
   } = usePosts(10);
 
@@ -26,7 +26,7 @@ const PostFeedContainer = () => {
       hasNextPage={hasNextPage}
       deletePost={deletePost}
       toggleLike={toggleLike}
-      refetch={refetch}
+      refetchPosts={refetchPosts}
       loadMore={loadMore}
       feedType={feedType}
       setFeedType={setFeedType}

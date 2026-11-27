@@ -17,7 +17,7 @@ const Posts = ({
   hasNextPage,
   deletePost,
   toggleLike,
-  refetch,
+  refetchPosts,
   loadMore,
 }: PostsProps) => {
   return (

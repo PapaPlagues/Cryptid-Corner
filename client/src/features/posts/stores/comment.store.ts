@@ -65,16 +65,14 @@ const useCommentStore = create<CommentState>((set, get) => ({
     set({ isCreatingComment: true });
 
     try {
-      const data = await createCommentRequest(postId, content);
+      const comment = await createCommentRequest(postId, content);
 
       set((state) => ({
         comments:
           state.commentsPostId === postId
-            ? [...state.comments, data]
+            ? [...state.comments, comment]
             : state.comments,
       }));
-    } catch (err) {
-      console.error(err);
     } finally {
       set({ isCreatingComment: false });
     }
@@ -100,11 +98,11 @@ const useCommentStore = create<CommentState>((set, get) => ({
     set({ isLoadingCommentLike: true });
 
     try {
-      const data = await createCommentLikeRequest(commentId);
+      const updatedComment = await createCommentLikeRequest(commentId);
 
       set((state) => ({
         comments: state.comments.map((comment) =>
-          comment.id === commentId ? data : comment,
+          comment.id === commentId ? updatedComment : comment,
         ),
       }));
     } catch (err) {
@@ -118,11 +116,11 @@ const useCommentStore = create<CommentState>((set, get) => ({
     set({ isLoadingCommentLike: true });
 
     try {
-      const data = await deleteCommentLikeRequest(commentId);
+      const updatedComment = await deleteCommentLikeRequest(commentId);
 
       set((state) => ({
         comments: state.comments.map((comment) =>
-          comment.id === commentId ? data : comment,
+          comment.id === commentId ? updatedComment : comment,
         ),
       }));
     } catch (err) {

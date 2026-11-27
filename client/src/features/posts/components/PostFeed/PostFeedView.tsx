@@ -9,7 +9,7 @@ type PostFeedProps = {
   isLoadingInit: boolean;
   isLoadingNextPage: boolean;
   hasNextPage: boolean;
-  refetch: () => Promise<void>;
+  refetchPosts: () => Promise<void>;
   loadMore: () => Promise<void>;
 };
 
@@ -22,14 +22,14 @@ const PostFeedView = ({
   hasNextPage,
   deletePost,
   toggleLike,
-  refetch,
+  refetchPosts,
   loadMore,
   feedType,
   setFeedType,
 }: PostFeedProps) => {
   const handleFeedChange = (type) => {
     setFeedType(type);
-    refetch();
+    refetchPosts();
   };
 
   return (
@@ -69,7 +69,7 @@ const PostFeedView = ({
 
           <button
             type="button"
-            onClick={refetch}
+            onClick={refetchPosts}
             disabled={isLoadingInit}
             className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             aria-label="Refresh feed"
@@ -93,7 +93,7 @@ const PostFeedView = ({
           hasNextPage={hasNextPage}
           deletePost={deletePost}
           toggleLike={toggleLike}
-          refetch={refetch}
+          refetchPosts={refetchPosts}
           loadMore={loadMore}
         />
       </section>

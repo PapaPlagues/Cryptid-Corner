@@ -5,11 +5,6 @@ import {
   deletePost as deletePostRequest,
   createPostLike as createPostLikeRequest,
   deletePostLike as deletePostLikeRequest,
-  fetchComments,
-  createComment,
-  createCommentLike,
-  deleteCommentLike,
-  deleteComment,
   fetchPostsFeed,
 } from "@/features/posts/api/posts.api.js";
 import type { Post } from "@/shared/types/post.types.js";
@@ -42,6 +37,7 @@ type PostState = {
   deletePost: (postId: string) => Promise<void>;
   likePost: (postId: string) => Promise<void>;
   unlikePost: (postId: string) => Promise<void>;
+  incrementCommentCount: (postId: string) => void;
   setFeedType: (feedType: FeedType) => void;
 };
 
@@ -179,6 +175,16 @@ const usePostStore = create<PostState>((set, get) => ({
     } finally {
       set({ isLoadingLike: false });
     }
+  },
+
+  incrementCommentCount: (postId) => {
+    set((state) => ({
+      posts: state.posts.map((post) =>
+        post.id === postId
+          ? { ...post, commentCount: post.commentCount + 1 }
+          : post,
+      ),
+    }));
   },
 
   setFeedType: (feedType) => {

@@ -5,6 +5,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
   const posts = usePostStore((state) => state.posts);
   const getPosts = usePostStore((state) => state.getPosts);
   const getNextPage = usePostStore((state) => state.getNextPage);
+
   const deletePost = usePostStore((state) => state.deletePost);
   const setFeedType = usePostStore((state) => state.setFeedType);
 
@@ -43,7 +44,7 @@ const usePosts = (limit = 20, userId: string | null = null) => {
     deletePost,
     setFeedType,
     toggleLike,
-    refetch: () => getPosts(limit, userId),
+    refetchPosts: () => getPosts(limit, userId),
     loadMore: () => getNextPage(limit, userId),
   };
 };

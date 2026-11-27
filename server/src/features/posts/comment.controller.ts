@@ -50,7 +50,7 @@ const createComment = async (
     }
     const comment = await commentQueries.createComment(userId, postId, content);
     const formattedComment = formatCommentData(comment);
-    res.json({ comment: formattedComment });
+    res.json(formattedComment);
   } catch (err) {
     next(err);
   }
@@ -82,7 +82,7 @@ const deleteComment = async (
       commentId,
     );
     const formattedComment = formatCommentData(deletedComment);
-    res.json({ comment: formattedComment });
+    res.json(formattedComment);
   } catch (err) {
     next(err);
   }
@@ -104,7 +104,7 @@ const likeComment = async (
     const { commentId } = req.params;
     const comment = await commentQueries.likeComment(userId, commentId);
     const formattedComment = formatCommentData(comment);
-    res.json({ comment: formattedComment });
+    res.json(formattedComment);
   } catch (err) {
     next(err);
   }
@@ -126,7 +126,7 @@ const unlikeComment = async (
     const { commentId } = req.params;
     const comment = await commentQueries.unlikeComment(userId, commentId);
     const formattedComment = formatCommentData(comment);
-    res.json({ comment: formattedComment });
+    res.json(formattedComment);
   } catch (err) {
     next(err);
   }

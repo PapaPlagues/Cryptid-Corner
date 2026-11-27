@@ -20,12 +20,12 @@ const UserProfileContainer = ({ userId }: UserProfileContainerProps) => {
 
   const {
     posts,
-    isLoadingPosts,
+    isLoadingInit,
     isLoadingNextPage,
     hasNextPage,
     isLoadingLike,
     toggleLike,
-    refetch,
+    refetchPosts,
     loadMore,
   } = usePosts(10, userId);
 
@@ -50,11 +50,11 @@ const UserProfileContainer = ({ userId }: UserProfileContainerProps) => {
       isLoadingLike={isLoadingLike}
       // User Posts
       posts={posts}
-      isLoadingPosts={isLoadingPosts}
+      isLoadingInit={isLoadingInit}
       isLoadingNextPage={isLoadingNextPage}
       hasNextPage={hasNextPage}
       toggleLike={toggleLike}
-      refetch={refetch}
+      refetchPosts={refetchPosts}
       loadMore={loadMore}
     />
   );

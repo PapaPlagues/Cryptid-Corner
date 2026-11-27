@@ -27,11 +27,11 @@ const UserProfileView = ({
   // User Posts
   posts,
   hasNextPage,
-  isLoadingPosts,
+  isLoadingInit,
   isLoadingNextPage,
   isLoadingLike,
   toggleLike,
-  refetch,
+  refetchPosts,
   loadMore,
 }: UserProfileProps) => {
   if (!user) return <p>User not found.</p>;
@@ -55,10 +55,10 @@ const UserProfileView = ({
       {/* Posts */}
       <UserPosts
         posts={posts}
-        isLoadingPosts={isLoadingPosts}
+        isLoadingInit={isLoadingInit}
         isLoadingNextPage={isLoadingNextPage}
         hasNextPage={hasNextPage}
-        refetch={refetch}
+        refetchPosts={refetchPosts}
         loadMore={loadMore}
         isLoadingLike={isLoadingLike}
         toggleLike={toggleLike}

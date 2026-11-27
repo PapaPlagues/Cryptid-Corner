@@ -4,4 +4,5 @@ export type Post = {
   media: string | null;
   createdAt: string;
   authorId: string;
+  commentCount: number;
 };

@@ -89,7 +89,7 @@ const createComment = async (
   content: string,
   signal?: AbortSignal,
 ) => {
-  const data = await request(`posts/${postId}/comments`, {
+  const data = await request(`api/posts/${postId}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const createComment = async (
 };
 
 const createCommentLike = async (commentId: string, signal?: AbortSignal) => {
-  const data = await request(`comments/${commentId}/likes`, {
+  const data = await request(`api/comments/${commentId}/likes`, {
     method: "POST",
     signal,
   });
@@ -109,7 +109,7 @@ const createCommentLike = async (commentId: string, signal?: AbortSignal) => {
 };
 
 const deleteCommentLike = async (commentId: string, signal?: AbortSignal) => {
-  const data = await request(`comments/${commentId}/likes`, {
+  const data = await request(`api/comments/${commentId}/likes`, {
     method: "DELETE",
     signal,
   });
@@ -117,7 +117,7 @@ const deleteCommentLike = async (commentId: string, signal?: AbortSignal) => {
 };
 
 const deleteComment = async (commentId: string, signal?: AbortSignal) => {
-  const data = await request(`comments/${commentId}`, {
+  const data = await request(`api/comments/${commentId}`, {
     method: "DELETE",
     signal,
   });
